@@ -9,7 +9,7 @@ import AgregarDetallesRestaurant from "./Components/RestDetails/restDetailsUploa
 import AgregarCliente from "./Components/Clientes/agregarCliente";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Signin from "./Components/Login/SignIn"   
-import Home from "./Components/HomeRestaurante/Home";
+import Home from "./Components/Home/Home";
 
 function App() { 
 

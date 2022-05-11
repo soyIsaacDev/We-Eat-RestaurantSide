@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import style from "./Home.module.css";
-import NavBarRestaurantero from "../NavBar/NavBarRestaurantero";
+import NavBar from "../NavBar/NavBar";
 import { getLoginSession } from "../../Actions/actions";
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <div>
       <h1>Bienvenido a We-Eat</h1>
-      <NavBarRestaurantero></NavBarRestaurantero>
+      <NavBar></NavBar>
     </div>
    )
 }
