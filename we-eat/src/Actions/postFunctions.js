@@ -1,16 +1,16 @@
 // Post a Servidor
 
 export function addClienteRestaurant(data){
-    async function postData(){
-        const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-      };
-      console.log(data)
-      await fetch('http://localhost:4000/ClienteRestaurantero/agregarclienterestaurantero', requestOptions)
-      };
-      postData();       
+        async function postData(){
+            const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        };
+        console.log(data)
+        await fetch('http://localhost:4000/ClienteRestaurantero/agregarclienterestaurantero', requestOptions)
+        };
+        postData();       
 }
 
 export function setUser(user) {
@@ -22,14 +22,16 @@ export function setUser(user) {
 
 export function postAuth(data){
     return function (dispatch){
-        dispatch(setUser(data));
+        console.log("Ejecutando postAuth");
+        dispatch(setUser(data.usuario));
         
         async function postData(){
             const requestOptions = {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(data),
-          };     
+          };   
+          console.log(data) ;
           await fetch('http://localhost:4000/loginrest/password', requestOptions)
             .then(response => response.json())
             .then(json => {

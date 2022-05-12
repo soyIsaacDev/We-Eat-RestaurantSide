@@ -13,12 +13,16 @@ export default function SignIn(props) {
     const dispatch = useDispatch();
     
     const [input, setInput] = useState({ username: "", password:""});
-    const loginState = useSelector((state) => state.loginState);
+    const [auth, setAuth] = useState({ username: ""});
+    const loginState = useSelector((state) => state.loginState.autenticated);
     const handleInputChange = function(e){
-        //dispatch(postAuth()) 
-
+        
         setInput({ 
             ...input,  
+            [e.target.name] : e.target.value
+        });
+        setAuth({ 
+            ...auth,  
             [e.target.name] : e.target.value
         });
     }
@@ -27,10 +31,11 @@ export default function SignIn(props) {
         e.preventDefault();
         console.log("en Login Onsubmit --> " + JSON.stringify(input))
         dispatch(postAuth(input))
-        dispatch(postLoginSession(input));
+        dispatch(postLoginSession(auth));
     }
     const location = useLocation();
     console.log(location);
+    console.log(loginState);
     
     return(
         <form onSubmit={onSubmit}>
@@ -51,7 +56,7 @@ export default function SignIn(props) {
             />
             <input type="submit" /* className={style.submit} *//>
 
-            {loginState.autenticated === "LogedIn" ? (
+            {loginState === "LoggedIn" ? (
                 <Navigate to="/Home" ></Navigate>
                 ): (
                 <h2>Usuario o Contraseña Incorrecta</h2>

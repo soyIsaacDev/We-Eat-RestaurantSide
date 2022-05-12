@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector  } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { addClienteRestaurant } from "../../Actions/postFunctions";
+import { addClienteRestaurant, postAuth, setUser } from "../../Actions/postFunctions";
 //import {getRestaurants, getCorporativo} from "../../Actions/actions";
 
 import style from "./agregarCliente.module.css";
 
 export default function AgregarCliente() {
   const dispatch = useDispatch();
-  /* useEffect(() => {
-    dispatch(getRestaurants());
-    dispatch(getCorporativo());
-  }, []); */
 
+  let navigate = useNavigate();
   const restaurants = useSelector((state) => state.loadedRestaurants);
   const corporativos = useSelector((state) => state.corporativo);
   
   const [input, setInput] = useState({
     nombre: "",
-    usuario: "",
-    contraseña: "",
-    nombreCorp: "",
-    nombreRest: "",
+    usuario: "",  
+    contraseña: "",   
+    nombreCorp: "dsad",
+    nombreRest: "sadas",
     tipo_de_usuario:"Director_General"
+  });
+  const [auth, setAuth] = useState({
+    usuario: "",  
+    contraseña: ""
   });
   const [error, setError] = useState(true);
 
@@ -31,17 +33,28 @@ export default function AgregarCliente() {
       ...input,
       [e.target.name]: e.target.value,
     });
+    
+
     if (input.nombre && input.usuario && input.contraseña !== "") {
       setError(false);
     } else {
       setError("Favor de llenar todos los datos");
-      console.log("Datos Enviados");
     }
   };
 
+  const handleAuthChange= function(e){
+    setAuth({
+      ...auth,
+      [e.target.name]: e.target.value,
+    });
+    console.log(auth);
+  }
   const onSubmit = async (e) => {
     e.preventDefault();
     addClienteRestaurant(input);
+    dispatch(setUser(auth.usuario))
+    //dispatch(postAuth(auth));
+    navigate("/Home", { replace: true });
   };
 
   return (
@@ -52,23 +65,23 @@ export default function AgregarCliente() {
         name="nombre"
         value={input.nombre}
         placeholder="Nombre"
-        onChange={(e) => handleInputChange(e)}
+        onChange={(e) => handleInputChange(e) }
       />
       <input
         name="usuario"
         value={input.usuario}
         placeholder="Usuario"
-        onChange={(e) => handleInputChange(e)}
+        onChange={(e) => handleInputChange(e) + handleAuthChange(e)}
       />
       <input
         name="contraseña"
         value={input.contraseña}
         placeholder="Contraseña"
-        onChange={(e) => handleInputChange(e)}
+        onChange={(e) => handleInputChange(e) + handleAuthChange(e)}
         type="password"
       />
 
-      <select 
+      {/* <select 
         id="nombreRest" 
         name="nombreRest"
         value= {input.nombreRest}
@@ -92,7 +105,7 @@ export default function AgregarCliente() {
               <option key = {corporativo.nombre} value={corporativo.nombre}>{corporativo.nombre}</option>
             )
           })}           
-      </select>
+      </select> */}
 
       <select 
         id="tipo_de_usuario" 

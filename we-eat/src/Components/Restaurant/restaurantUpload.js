@@ -1,25 +1,40 @@
 // based on https://www.pluralsight.com/guides/uploading-files-with-reactjs
 // and https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getUser } from "../../Actions/actions";
 
 import style from "./restautantUpload.module.css";
 
 export default function Restaurant() {
-    
+    let navigate = useNavigate();;
     const [input, setInput] = useState({ 
         nombre: "", direccion: "", area_de_reparto:"", actividad:"", estatus:"",
-        nombreCorp:"",  direccionCorp:"", costoEnvio: "", horarios: "", tipoComida:""
+        nombreCorp:"",  direccionCorp:"", costoEnvio: "", horarios: "", tipoComida:"", usuario:"",
     });
     console.log(input)
     
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
+    const usuario = useSelector((state)=>state.user);
+    console.log(usuario);
+    
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getUser());
+    }, []);
+    
 
     const onChangeHandler = (e) => {
         console.log(e.target.files[0]);
         setSelectedFile(e.target.files[0]);
         setIsFilePicked(true);
+        setInput({
+            ...input,
+            usuario
+        });  //REVISAR SI EL USUARIO QUEDA GRABADO BIEN
         console.log(input)
     }
 
@@ -31,44 +46,6 @@ export default function Restaurant() {
         console.log(input)
       }
 
-    /* const onSubmit = async(e) => {
-        e.preventDefault();
-        const formData = new FormData();
-		formData.append('file', selectedFile);
-        for(var pair of formData.entries()) {
-            console.log(pair[0]+ ', '+ pair[1]);
-         }
-         
-		await fetch(
-			'http://localhost:4000/restaurantes/agregarRestaurantes',
-			{
-				method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(input),
-			}
-		)
-			.then((response) => response.json())
-			.then((result) => {
-				console.log('Se agrego el restaurante correctamente:', result);
-			})
-			.catch((error) => {
-				console.error('Error al agregar restaurante:', error);
-			});
-        await fetch(
-			'http://localhost:4000/restaurantes/agregarImgRest',
-			{
-				method: 'POST',
-				body: formData,
-			}
-		)
-			.then((response) => response.json())
-			.then((result) => {
-				console.log('Imagen Agregada con Exito:', result);
-			})
-			.catch((error) => {
-				console.error('Error al agregar la Imagen:', error);
-			});
-	}; */
     const onSubmit = async(e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -92,6 +69,7 @@ export default function Restaurant() {
 			.catch((error) => {
 				console.error('Error al agregar la Imagen:', error);
 			});
+        navigate("/Home", { replace: true });
 	};
 
     return (
