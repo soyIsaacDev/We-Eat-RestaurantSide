@@ -23,14 +23,14 @@ export default function SignIn(props) {
         });
         setAuth({ 
             ...auth,  
-            [e.target.name] : e.target.value
+            username : e.target.value
         });
     }
 
     const onSubmit = async(e) => {
         e.preventDefault();
         console.log("en Login Onsubmit --> " + JSON.stringify(input))
-        dispatch(postAuth(input))
+        dispatch(postAuth(input, auth))
         dispatch(postLoginSession(auth));
     }
     const location = useLocation();

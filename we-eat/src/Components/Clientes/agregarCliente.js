@@ -2,29 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector  } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { addClienteRestaurant, postAuth, setUser } from "../../Actions/postFunctions";
-//import {getRestaurants, getCorporativo} from "../../Actions/actions";
+import { addClienteRestaurant } from "../../Actions/postFunctions";
 
 import style from "./agregarCliente.module.css";
 
 export default function AgregarCliente() {
   const dispatch = useDispatch();
-
   let navigate = useNavigate();
-  const restaurants = useSelector((state) => state.loadedRestaurants);
-  const corporativos = useSelector((state) => state.corporativo);
   
   const [input, setInput] = useState({
-    nombre: "",
-    usuario: "",  
+    nombre: "",  
+    usuario: "",     
     contraseña: "",   
     nombreCorp: "dsad",
     nombreRest: "sadas",
     tipo_de_usuario:"Director_General"
-  });
-  const [auth, setAuth] = useState({
-    usuario: "",  
-    contraseña: ""
   });
   const [error, setError] = useState(true);
 
@@ -34,7 +26,6 @@ export default function AgregarCliente() {
       [e.target.name]: e.target.value,
     });
     
-
     if (input.nombre && input.usuario && input.contraseña !== "") {
       setError(false);
     } else {
@@ -42,18 +33,9 @@ export default function AgregarCliente() {
     }
   };
 
-  const handleAuthChange= function(e){
-    setAuth({
-      ...auth,
-      [e.target.name]: e.target.value,
-    });
-    console.log(auth);
-  }
   const onSubmit = async (e) => {
     e.preventDefault();
-    addClienteRestaurant(input);
-    dispatch(setUser(auth.usuario))
-    //dispatch(postAuth(auth));
+    dispatch(addClienteRestaurant(input));
     navigate("/Home", { replace: true });
   };
 
@@ -71,13 +53,13 @@ export default function AgregarCliente() {
         name="usuario"
         value={input.usuario}
         placeholder="Usuario"
-        onChange={(e) => handleInputChange(e) + handleAuthChange(e)}
+        onChange={(e) => handleInputChange(e) }
       />
       <input
         name="contraseña"
         value={input.contraseña}
         placeholder="Contraseña"
-        onChange={(e) => handleInputChange(e) + handleAuthChange(e)}
+        onChange={(e) => handleInputChange(e) }
         type="password"
       />
 

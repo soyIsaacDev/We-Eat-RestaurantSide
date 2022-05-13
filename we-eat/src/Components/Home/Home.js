@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 import style from "./Home.module.css";
 import NavBar from "../NavBar/NavBar";
-import { getLoginSession } from "../../Actions/actions";
+import { getLoginSession, getUser } from "../../Actions/actions";
 
 export default function Home() {
   var loginState  = useSelector((state) => state.loginState);
   
-  const dispatch = useDispatch();
+  /* const dispatch = useDispatch();
   useEffect(() => {
-    //dispatch(getLoginSession());
-  }, []);
+    dispatch(getUser());
+  }, []); */
   
   return (
     <div>
