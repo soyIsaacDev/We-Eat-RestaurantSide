@@ -1,11 +1,9 @@
-import React,{ useState,useEffect } from "react";
-import { loginSession } from "../../Actions/postFunctions";
+import React,{ useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import { useDispatch, useSelector  } from "react-redux";
 
-import { getUser } from "../../Actions/actions";
-import { postLoginSession, postAuth } from "../../Actions/postFunctions";
+import { postLoginSession, postAuth } from "../../Actions/APIMiddleware";
 
 //import style from "";
 
@@ -13,7 +11,7 @@ export default function SignIn(props) {
     const dispatch = useDispatch();
     
     const [input, setInput] = useState({ username: "", password:""});
-    const [auth, setAuth] = useState({ username: ""});
+    /* const [auth, setAuth] = useState({ username: ""}); */
     const loginState = useSelector((state) => state.loginState.autenticated);
     const handleInputChange = function(e){
         
@@ -21,17 +19,17 @@ export default function SignIn(props) {
             ...input,  
             [e.target.name] : e.target.value
         });
-        setAuth({ 
+        /* setAuth({ 
             ...auth,  
             username : e.target.value
-        });
+        }); */
     }
 
     const onSubmit = async(e) => {
         e.preventDefault();
         console.log("en Login Onsubmit --> " + JSON.stringify(input))
-        dispatch(postAuth(input, auth))
-        dispatch(postLoginSession(auth));
+        dispatch(postAuth(input))
+        dispatch(postLoginSession(input));
     }
     const location = useLocation();
     console.log(location);

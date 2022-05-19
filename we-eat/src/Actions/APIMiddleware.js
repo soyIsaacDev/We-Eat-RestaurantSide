@@ -34,9 +34,10 @@ export function setUser(user) {
     };
 };
 
-export function postAuth(data, auth){
+export function postAuth(data){
     return function (dispatch){
         console.log("Ejecutando postAuth");
+        const auth = {"username": data.username}
         console.log("Ejecutando postAuth -username --> "+ auth);
         dispatch(setUser(auth));
         
@@ -79,10 +80,36 @@ export function postLoginSession(data){
             .then(response => response.json())
             .then(json => {
                 dispatch(getLogginSession(json))
-                console.log("Session Autenticada"+JSON.stringify(json))
-            }
-            );  
+                console.log("Session Autenticada L-83 APIMiddleware"+JSON.stringify(json))
+            });  
         };    
         postData();
-    }
-}
+    };
+};
+
+export function addPlatillo(file, input){
+    return function (dispatch){
+        async function postFormData(){
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('data', JSON.stringify(input));
+            for(var pair of formData.entries()) {
+                console.log(pair[0]+ ', '+ pair[1]);
+            }
+
+            await fetch('http://localhost:4000/restaurantes/agregarPlatillo',
+                {
+                    method: 'POST',
+                    body: formData,
+                }
+            )
+            .then((response) => response.json())
+            .then((result) => { console.log(result);  })
+            .catch((error) => {
+                    console.error('Error al agregar la Imagen:', error);
+            });       
+        }
+        postFormData();
+              
+    };
+};

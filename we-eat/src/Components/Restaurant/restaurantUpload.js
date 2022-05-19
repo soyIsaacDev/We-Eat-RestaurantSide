@@ -1,30 +1,29 @@
 // based on https://www.pluralsight.com/guides/uploading-files-with-reactjs
 // and https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples
 
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../../Actions/actions";
 
 import style from "./restautantUpload.module.css";
 
 export default function Restaurant() {
     let navigate = useNavigate();;
     const [input, setInput] = useState({ 
-        nombre: "", direccion: "", area_de_reparto:"", actividad:"", estatus:"",
-        nombreCorp:"",  direccionCorp:"", costoEnvio: "", horarios: "", tipoComida:"", usuario:"",
+        nombre: "", direccion: "", area_de_reparto:"", actividad:"Abierto", estatus:"Activo",
+        nombreCorp:"",  direccionCorp:"", costoEnvio: "", horarios: "", tipoComida:"Desayuno", usuario:"",
     });
     console.log(input)
     
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
-    const usuario = useSelector((state)=>state.user);
+    const usuario = useSelector((state)=>state.user.username);
     console.log(usuario);
     
-    const dispatch = useDispatch();
+    /* const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getUser());
-    }, []);
+    }, []); */
     
 
     const onChangeHandler = (e) => {
@@ -34,7 +33,7 @@ export default function Restaurant() {
         setInput({
             ...input,
             usuario
-        });  //REVISAR SI EL USUARIO QUEDA GRABADO BIEN
+        }); 
         console.log(input)
     }
 
@@ -143,6 +142,7 @@ export default function Restaurant() {
                 onChange={(e) => handleInputChange(e)}
             >
                 <option value="Desayuno">Desayuno</option>
+                <option value="Desayuno y brunch">Desayuno y brunch</option>
                 <option value="Comida">Comida</option>
                 <option value="Cena">Cena</option>
                 <option value="Ensaladas">Ensaladas</option>
@@ -164,7 +164,6 @@ export default function Restaurant() {
             )}
             
                 <input type="submit" className={style.submit}/>
-                {/* <button onClick={onSubmit}>Submit</button> */}
             
         </form> 
     )

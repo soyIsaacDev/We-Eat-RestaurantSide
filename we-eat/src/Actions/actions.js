@@ -50,3 +50,24 @@ export function getCorporativo(){
     };
 }
 
+export function setLoading() {
+    console.log("Settienado Loading")
+    return { 
+        type: "LOADING"
+    };
+};
+
+export function getClienteyRestaurantes (usuario){
+    return function (dispatch){
+       return fetch("http://localhost:4000/clienterestaurantero/user?usuario="+ usuario)
+           .then(response => response.json())
+           .then(json => {
+               console.log("Respuesta de getClienteyRestaurantes   "+json)
+               dispatch({
+                   type: "GET_CLIENTEYRESTAURANTES",
+                   payload: json
+               }); 
+               dispatch(setLoading());
+           });
+    };
+}

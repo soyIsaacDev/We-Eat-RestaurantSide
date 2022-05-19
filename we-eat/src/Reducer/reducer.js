@@ -1,12 +1,20 @@
 //REDUCER
 const initialState = {
     
-    loginState:[{"autenticated":"LoggedIn"}],
-    user: []
+    loginState:""/* [{"autenticated":"LoggedIn"}] */,
+    user: [],
+    clienteyRestaurantes:[],
+    loading: true
   }
 
   const rootReducer = (state = initialState, action) => {
     switch (action.type) {
+
+      case 'LOADING':
+        return{
+          ...state,
+          loading: false
+        }
       
       case 'GET_LOGIN':
         return{
@@ -18,6 +26,12 @@ const initialState = {
         return{
           ...state,
           user: action.payload
+        }
+
+      case 'GET_CLIENTEYRESTAURANTES':
+        return{
+          ...state,
+          clienteyRestaurantes: action.payload
         }
       
       default:
