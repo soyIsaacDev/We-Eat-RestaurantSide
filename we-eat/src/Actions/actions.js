@@ -51,15 +51,16 @@ export function getCorporativo(){
 }
 
 export function setLoading() {
-    console.log("Settienado Loading")
+    console.log("Seteando Loading")
     return { 
         type: "LOADING"
     };
 };
 
-export function getClienteyRestaurantes (usuario){
+export function getClienteyRestaurantes (restauranteroId){
+    console.log("getClienteyRestaurantes ejecutado")
     return function (dispatch){
-       return fetch("http://localhost:4000/clienterestaurantero/user?usuario="+ usuario)
+       return fetch("http://localhost:4000/clienteRestaurantero/clienterestaurantero/"+ restauranteroId)
            .then(response => response.json())
            .then(json => {
                console.log("Respuesta de getClienteyRestaurantes   "+json)
@@ -67,7 +68,21 @@ export function getClienteyRestaurantes (usuario){
                    type: "GET_CLIENTEYRESTAURANTES",
                    payload: json
                }); 
-               dispatch(setLoading());
+               //dispatch(setLoading());
+           });
+    };
+}
+
+export function getPedidos(RestauranteId){
+    return function (dispatch){
+       return fetch("http://localhost:4000/pedidos/pedido/:"+RestauranteId)
+           .then(response => response.json())
+           .then(json => {
+               console.log(json)
+               dispatch({
+                   type: "GET_PEDIDOS",
+                   payload: json
+               }); 
            });
     };
 }

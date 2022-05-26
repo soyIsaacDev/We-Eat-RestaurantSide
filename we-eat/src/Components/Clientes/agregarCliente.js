@@ -14,8 +14,8 @@ export default function AgregarCliente() {
     nombre: "",  
     usuario: "",     
     contraseña: "",   
-    nombreCorp: "dsad",
-    nombreRest: "sadas",
+    nombreCorp: "Piña",
+    nombreRest: "Otro",
     tipo_de_usuario:"Director_General"
   });
   const [error, setError] = useState(true);

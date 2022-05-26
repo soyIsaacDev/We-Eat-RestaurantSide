@@ -11,18 +11,12 @@ export default function SignIn(props) {
     const dispatch = useDispatch();
     
     const [input, setInput] = useState({ username: "", password:""});
-    /* const [auth, setAuth] = useState({ username: ""}); */
     const loginState = useSelector((state) => state.loginState.autenticated);
     const handleInputChange = function(e){
-        
         setInput({ 
             ...input,  
             [e.target.name] : e.target.value
         });
-        /* setAuth({ 
-            ...auth,  
-            username : e.target.value
-        }); */
     }
 
     const onSubmit = async(e) => {

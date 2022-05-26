@@ -48,7 +48,7 @@ export function postAuth(data){
               body: JSON.stringify(data),
           };   
           console.log(data) ;
-          await fetch('http://localhost:4000/loginrest/password', requestOptions)
+          await fetch('http://localhost:4000/authrestaurantero/loginrest/password', requestOptions)
             /* .then(response => response.json())
             .then(json => {
                 console.log("Sesion ESTABLECIDA")                
@@ -76,7 +76,7 @@ export function postLoginSession(data){
               body: JSON.stringify(data),
           };     
           console.log(data)
-          await fetch('http://localhost:4000/sesionrestaurantero', requestOptions)
+          await fetch('http://localhost:4000/authrestaurantero/sesionrestaurantero', requestOptions)
             .then(response => response.json())
             .then(json => {
                 dispatch(getLogginSession(json))
