@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { getClienteyRestaurantes } from "../../Actions/actions";
 import { addPlatillo } from "../../Actions/APIMiddleware";
 
@@ -7,6 +9,7 @@ import style from "./platilloUpload.module.css";
 
 export default function PlatilloUpload() {
   const dispatch = useDispatch();
+  let navigate = useNavigate();
   const username = useSelector((state) => state.user.username);
   const loading = useSelector((state) => state.loading);
   console.log("LOADING  "+loading)
@@ -14,21 +17,24 @@ export default function PlatilloUpload() {
     (state) => state.clienteyRestaurantes.Restaurantes
   );
   console.log("Username L20 PlatilloUpload -->>  " + username);
-  const [input, setInput] = useState({
+  /* const [input, setInput] = useState({
     nombreMenu: "Desayuno",
     nombrePlatillo: "",
     descripcion: "",
     precio: "",
     nombreRest: "",
+  }); */
+  //ParaTesteo
+  const [input, setInput] = useState({
+    nombreMenu: "Desayuno",
+    nombrePlatillo: "Langosta a la Mantequilla",
+    descripcion: "Cola de Langosta preparada con Mantequilla",
+    precio: 350,
+    nombreRest: "",
   });
 
   console.log(restaurantes);
   console.log(input)
-  
-  useEffect(() => {
-    dispatch(getClienteyRestaurantes(username));
-    console.log("Username de useEffect " + username);
-  }, []);
 
   useEffect(() => {
     if(restaurantes){
@@ -66,6 +72,7 @@ export default function PlatilloUpload() {
   const onSubmit = async (e) => {
     e.preventDefault();
     dispatch(addPlatillo(selectedFile, input));
+    navigate("/Home", { replace: true });
   };
   
     return (

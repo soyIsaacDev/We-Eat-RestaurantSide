@@ -9,9 +9,14 @@ import style from "./restautantUpload.module.css";
 
 export default function Restaurant() {
     let navigate = useNavigate();;
-    const [input, setInput] = useState({ 
+    /* const [input, setInput] = useState({ 
         nombre: "", direccion: "", area_de_reparto:"", actividad:"Abierto", estatus:"Activo",
         nombreCorp:"",  direccionCorp:"", costoEnvio: "", horarios: "", tipoComida:"Desayuno", usuario:"",
+    }); */
+    //PARA TESTEO
+    const [input, setInput] = useState({ 
+        nombre: "Cedron", direccion: "Condesa", area_de_reparto:3, actividad:"Abierto", estatus:"Activo",
+        nombreCorp:"Cedron",  direccionCorp:"Condesa", costoEnvio: 25, horarios: "9-12", tipoComida:"Desayuno", usuario:"",
     });
     console.log(input)
     

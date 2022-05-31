@@ -4,6 +4,7 @@ const initialState = {
     loginState:""/* [{"autenticated":"LoggedIn"}] */,
     user: [],
     clienteyRestaurantes:[],
+    pedidos:[],
     loading: true
   }
 
@@ -32,6 +33,11 @@ const initialState = {
         return{
           ...state,
           clienteyRestaurantes: action.payload
+        }
+      case 'GET_PEDIDOS':
+        return{
+          ...state,
+          pedidos: action.payload
         }
       
       default:

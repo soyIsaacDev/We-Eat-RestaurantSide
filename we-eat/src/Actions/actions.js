@@ -58,7 +58,7 @@ export function setLoading() {
 };
 
 export function getClienteyRestaurantes (restauranteroId){
-    console.log("getClienteyRestaurantes ejecutado")
+    console.log("GETCLIENTE Y RESTAURANTES EJECUTADO")
     return function (dispatch){
        return fetch("http://localhost:4000/clienteRestaurantero/clienterestaurantero/"+ restauranteroId)
            .then(response => response.json())
@@ -68,17 +68,18 @@ export function getClienteyRestaurantes (restauranteroId){
                    type: "GET_CLIENTEYRESTAURANTES",
                    payload: json
                }); 
-               //dispatch(setLoading());
+               dispatch(setLoading());
            });
     };
 }
 
 export function getPedidos(RestauranteId){
+console.log("GET PEDIDOS EJECUTADO")
     return function (dispatch){
-       return fetch("http://localhost:4000/pedidos/pedido/:"+RestauranteId)
+       /* return fetch("http://localhost:4000/pedidos/pedido/") */
+       return fetch("http://localhost:4000/pedidos/pedido/"+RestauranteId)
            .then(response => response.json())
            .then(json => {
-               console.log(json)
                dispatch({
                    type: "GET_PEDIDOS",
                    payload: json
