@@ -73,10 +73,9 @@ export function getClienteyRestaurantes (restauranteroId){
     };
 }
 
-export function getPedidos(RestauranteId){
+export function getPedidos(RestauranteId ){
 console.log("GET PEDIDOS EJECUTADO")
     return function (dispatch){
-       /* return fetch("http://localhost:4000/pedidos/pedido/") */
        return fetch("http://localhost:4000/pedidos/pedido/"+RestauranteId)
            .then(response => response.json())
            .then(json => {
@@ -87,3 +86,21 @@ console.log("GET PEDIDOS EJECUTADO")
            });
     };
 }
+
+
+export function cambiarStatus(PedidoId, status){
+    return function (dispatch){
+       return fetch("http://localhost:4000/pedidos/cambiarStatus/"+PedidoId +"/"+status)
+           .then(response => response.json())
+           .then(json => console.log(JSON.stringify(json))); 
+    };
+};
+
+export function recibirPedido(PedidoId){
+        return function (dispatch){
+           return fetch("http://localhost:4000/pedidos/cambiaraRecibido/"+PedidoId)
+               .then(response => response.json())
+               .then(json => console.log(JSON.stringify(json))); 
+        };
+};
+    
