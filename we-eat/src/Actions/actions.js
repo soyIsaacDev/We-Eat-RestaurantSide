@@ -103,4 +103,11 @@ export function recibirPedido(PedidoId){
                .then(json => console.log(JSON.stringify(json))); 
         };
 };
+
+export function setLocation(location) {
+    return { 
+        type: "LOCATION",
+        payload: location
+    };
+};
     

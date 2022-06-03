@@ -5,7 +5,8 @@ const initialState = {
     user: [],
     clienteyRestaurantes:[],
     pedidos:[],
-    loading: true
+    loading: true,
+    location: ""
   }
 
   const rootReducer = (state = initialState, action) => {
@@ -38,6 +39,11 @@ const initialState = {
         return{
           ...state,
           pedidos: action.payload
+        }
+      case 'LOCATION':
+        return{
+          ...state,
+          location: action.payload
         }
       
       default:

@@ -10,6 +10,7 @@ import AgregarClientes from "./Components/Clientes/agregarCliente";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Signin from "./Components/Login/SignIn"   
 import Home from "./Components/Home/Home";
+import Map from "./Components/Map/Mapa";
 
 function App() { 
 
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Signin />} />
             <Route exact path="/AgregarClientes" element = { <AgregarClientes/> } />
+            <Route path="/map" element={<Map />} />
                         
             <Route element={<ProtectedRoutes />}>
                 
