@@ -48,7 +48,7 @@ export function postAuth(data){
               body: JSON.stringify(data),
           };   
           console.log(data) ;
-          await fetch('http://localhost:4000/authrestaurantero/loginrest/password', requestOptions)
+          await fetch('http://localhost:4000/authcliente/login/password', requestOptions)
             /* .then(response => response.json())
             .then(json => {
                 console.log("Sesion ESTABLECIDA")                
@@ -67,7 +67,7 @@ export function getLogginSession(session) {
     };
 };
 
-export function postLoginSession(data){
+export function postLoginSession(data, tipoUsuario){
     return function (dispatch){
         async function postData(){
             const requestOptions = {
@@ -76,12 +76,22 @@ export function postLoginSession(data){
               body: JSON.stringify(data),
           };     
           console.log(data)
-          await fetch('http://localhost:4000/authrestaurantero/sesionrestaurantero', requestOptions)
+          if(tipoUsuario === "Restaurante" ){
+            await fetch('http://localhost:4000/authrestaurantero/sesionrestaurantero', requestOptions)
             .then(response => response.json())
             .then(json => {
                 dispatch(getLogginSession(json))
                 console.log("Session Autenticada L-83 APIMiddleware"+JSON.stringify(json))
-            });  
+            });
+          }
+          else{
+            await fetch('http://localhost:4000/authrepartidor/SesionRepartidor', requestOptions)
+            .then(response => response.json())
+            .then(json => {
+                dispatch(getLogginSession(json))
+                console.log("Session Autenticada L-83 APIMiddleware"+JSON.stringify(json))
+            });
+          } 
         };    
         postData();
     };
@@ -113,3 +123,27 @@ export function addPlatillo(file, input){
               
     };
 };
+
+export function addRepartidor(data){
+    async function postData(){
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+      };
+      await fetch('http://localhost:4000/repartidor/nuevoRepartidor', requestOptions)
+      };
+      postData();       
+}
+
+export function addUbicacionRepartidor(data){
+    async function postUbicacion(){
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+      };
+      await fetch('http://localhost:4000/repartidor/ubicacionRepartidor', requestOptions)
+      };
+      postUbicacion();       
+}

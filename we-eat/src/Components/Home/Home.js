@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
-import { getPedidos, getClienteyRestaurantes, recibirPedido, cambiarStatus } from '../../Actions/actions';
+import { getPedidos, getClienteyRestaurantes, cambiarStatus, repartir } from '../../Actions/actions';
 import NavBar from "../NavBar/NavBar";
 import s from "./Home.module.css";
 
@@ -51,6 +51,12 @@ export default function Home() {
     setEstado(!estado);
   }
 
+  const Repartir= function(e, p){
+    p.reparto = "Repartir"
+    dispatch(repartir(p.id, "Repartir"))
+    setEstado(!estado);
+  }
+
   const cambiarAListo = function(e, p){
     p.status = "Listo"
     dispatch(cambiarStatus(p.id, "Listo" ))
@@ -75,7 +81,7 @@ export default function Home() {
         <div className={s.boton}></div>      
       </div>
       <p></p>
-      <div>Recibidos</div>
+      <h3>Recibidos</h3>
       <p></p>
       {pedido.map((p) =>{
         console.log(p.status);
@@ -92,12 +98,13 @@ export default function Home() {
           )
         }
       })}
+
       <p></p>
-      <div>En Proceso</div>
+      <h3>Repartir</h3>
       <p></p>
       {pedido.map((p) =>{
         console.log(p.status);
-        if(p.status === "En_Proceso"){
+        if(p.status === "En_Proceso" && p.reparto === null){
           return(
             <div className={s.pedidowrap}>
               <div className={s.cantidad}>{p.id}</div>
@@ -105,7 +112,26 @@ export default function Home() {
               <div className={s.platillo}>{p.Platillos[0].nombre}</div>
               <div className={s.estatus}> {p.status}</div>
               <div className={s.notas}> {p.notas}</div>
-              <button className={s.boton} onClick={(e) => cambiarAListo(e,p)}>Listo</button>
+              <button className={s.boton} onClick={(e) => Repartir(e,p)}>Buscar Repartidor</button>
+            </div>          
+          )
+        }
+      })}
+
+      <p></p>
+      <h3>Repartidor Asignado</h3>
+      <p></p>
+      {pedido.map((p) =>{
+        console.log(p.status);
+        if(p.reparto === "Repartir"){
+          return(
+            <div className={s.pedidowrap}>
+              <div className={s.cantidad}>{p.id}</div>
+              <div className={s.cantidad}>{p.cantidad}</div>
+              <div className={s.platillo}>{p.Platillos[0].nombre}</div>
+              <div className={s.estatus}> {p.status}</div>
+              <div className={s.notas}> {p.notas}</div>
+              <button className={s.boton} onClick={(e) => cambiarAListo(e,p)}>Entregar</button>
             </div>          
           )
         }

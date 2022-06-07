@@ -11,7 +11,9 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import Signin from "./Components/Login/SignIn"   
 import Home from "./Components/Home/Home";
 import Map from "./Components/Map/Mapa";
-
+import Repartidor from "./Components/Repartidor/Repartidor";
+import UbicacionRepartidor from "./Components/Repartidor/UbicacionRepartidor";
+import HomeRepartidor from "./Components/Home/HomeRepartidor";
 function App() { 
 
   return (
@@ -20,11 +22,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Signin />} />
             <Route exact path="/AgregarClientes" element = { <AgregarClientes/> } />
+            <Route exact path="/AgregarRepartidor" element = { <Repartidor/> } />
+            <Route exact path="/UbicacionRepartidor" element = { <UbicacionRepartidor/> } />
             <Route path="/map" element={<Map />} />
                         
             <Route element={<ProtectedRoutes />}>
                 
                 <Route exact path="/Home" element = { <Home/> } />
+                <Route exact path="/HomeRepartidor" element = { <HomeRepartidor/> } />
                 <Route exact path="/agregarRestaurant" element = { <AgregarRestaurant/> } />
                 <Route exact path="/agregarPlatillo" element = { <AgregarPlatillo/> } />
                 <Route exact path="/agregarDetallesRestaurant" element = { <AgregarDetallesRestaurant/> } />

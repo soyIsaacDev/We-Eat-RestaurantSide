@@ -96,12 +96,12 @@ export function cambiarStatus(PedidoId, status){
     };
 };
 
-export function recibirPedido(PedidoId){
-        return function (dispatch){
-           return fetch("http://localhost:4000/pedidos/cambiaraRecibido/"+PedidoId)
-               .then(response => response.json())
-               .then(json => console.log(JSON.stringify(json))); 
-        };
+export function repartir(PedidoId, reparto){
+    return function (dispatch){
+       return fetch("http://localhost:4000/pedidos/cambiarReparto/"+PedidoId +"/"+reparto)
+           .then(response => response.json())
+           .then(json => console.log(JSON.stringify(json))); 
+    };
 };
 
 export function setLocation(location) {
@@ -110,4 +110,16 @@ export function setLocation(location) {
         payload: location
     };
 };
-    
+
+export function buscarPedidos(){
+        return function (dispatch){
+           return fetch("http://localhost:4000/pedidos/pedidosreparto/Repartir")
+               .then(response => response.json())
+               .then(json => {
+                   dispatch({
+                       type: "GET_PEDIDOS",
+                       payload: json
+                   }); 
+               });
+        };
+    }

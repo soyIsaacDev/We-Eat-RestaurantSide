@@ -11,6 +11,7 @@ export default function SignIn(props) {
     const dispatch = useDispatch();
     
     const [input, setInput] = useState({ username: "", password:""});
+    const [tipoUsuario, setTipoUsuario] = useState("")
     const loginState = useSelector((state) => state.loginState.autenticated);
     const handleInputChange = function(e){
         setInput({ 
@@ -19,15 +20,21 @@ export default function SignIn(props) {
         });
     }
 
+    const handleSelectChange = function(e){
+        setTipoUsuario(e.target.value);
+    };
+
     const onSubmit = async(e) => {
         e.preventDefault();
         console.log("en Login Onsubmit --> " + JSON.stringify(input))
         dispatch(postAuth(input))
-        dispatch(postLoginSession(input));
+        dispatch(postLoginSession(input, tipoUsuario));
     }
     const location = useLocation();
     console.log(location);
     console.log(loginState);
+    console.log(tipoUsuario)
+    
     
     return(
         <form onSubmit={onSubmit}>
@@ -46,13 +53,32 @@ export default function SignIn(props) {
                 /* className= {style.nombreRest} */
                 type= "password"
             />
+            {/* <p>Tipo de Usuario</p> */}
+            <label>Tipo de Usuario</label>
+            <select
+                id="tipoUsuario"
+                name="tipoUsuario"
+                value={input.tipoUsuario}
+                onChange={(e) => handleSelectChange(e)}
+                >
+                    <option value="">Selecciona tu tipo de Usuario</option>
+                    <option value="Restaurante">Restaurante</option>
+                    <option value="Repartidor">Repartidor</option>
+            </select>
+            
             <input type="submit" /* className={style.submit} *//>
 
             {loginState === "LoggedIn" ? (
-                <Navigate to="/Home" ></Navigate>
-                ): (
-                <h2>Usuario o Contraseña Incorrecta</h2>
-                )}
+                tipoUsuario=== "Repartidor"?(
+                    <Navigate to="/HomeRepartidor" ></Navigate>
+                    ):
+                    tipoUsuario=== "Restaurante"?(<Navigate to="/Home" ></Navigate>):(<div></div>)
+                ) 
+            : 
+                (
+                    <h2>Favor de llenar tus datos</h2>
+                )
+            }
 
         </form>
     )
