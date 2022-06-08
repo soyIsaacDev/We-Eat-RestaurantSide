@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
-import { getPedidos, cambiarStatus, buscarPedidos, repartir } from '../../Actions/actions';
+import { getPedidos, cambiarStatus, buscarEnvio, enviar } from '../../Actions/actions';
 import s from "./Home.module.css";
 
 export default function Home() {
@@ -13,11 +13,11 @@ export default function Home() {
 
   useEffect(() => {
     //First run tu load Orders
-    dispatch(buscarPedidos());
+    dispatch(buscarEnvio("Buscando Repartidor"));
     
     // To keep looking for Orders after loading
     const interval = setInterval(() =>{
-        dispatch(buscarPedidos());
+        dispatch(buscarEnvio("Buscando Repartidor"));
     }, 30000);
     
     return() => clearInterval(interval);
@@ -25,7 +25,7 @@ export default function Home() {
 
   const cambiarAAceptarReparto = function(e, p){
     p.status = "Aceptado"
-    dispatch(repartir(p.id, "Aceptado" ))
+    dispatch(enviar(p.id, "Aceptado" ))
     setEstado(!estado);
   }
 
@@ -38,7 +38,7 @@ export default function Home() {
   const cambiarAEntregado = function(e, p){
     p.status = "Entregado"
     dispatch(cambiarStatus(p.id, "Entregado" ))
-    dispatch(repartir(p.id, "Entregado" ))
+    dispatch(enviar(p.id, "Entregado" ))
     setEstado(!estado);
   }
   
@@ -59,7 +59,7 @@ export default function Home() {
       <p></p>
       {pedido.map((p) =>{
         console.log(p.status);
-        if(p.reparto === "Repartir"){
+        if(p.reparto === "Buscando Repartidor"){
           return(
             <div className={s.pedidowrap}>
               <div className={s.cantidad}>{p.cantidad}</div>

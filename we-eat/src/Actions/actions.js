@@ -88,19 +88,25 @@ console.log("GET PEDIDOS EJECUTADO")
 }
 
 
-export function cambiarStatus(PedidoId, status){
+export function cambiarStatus( pedidoId, status){
     return function (dispatch){
-       return fetch("http://localhost:4000/pedidos/cambiarStatus/"+PedidoId +"/"+status)
+       return fetch("http://localhost:4000/pedidos/cambiarStatus/"+ pedidoId +"/"+status)
            .then(response => response.json())
            .then(json => console.log(JSON.stringify(json))); 
     };
 };
 
-export function repartir(PedidoId, reparto){
+export function enviar(reparto, pedidoId){
+    console.log(reparto);
     return function (dispatch){
-       return fetch("http://localhost:4000/pedidos/cambiarReparto/"+PedidoId +"/"+reparto)
+       return fetch("http://localhost:4000/envios/nuevoEnvio/" + reparto +"/" +  pedidoId)
            .then(response => response.json())
-           .then(json => console.log(JSON.stringify(json))); 
+           .then(json => {
+            /* dispatch({
+                type: "GET_ENVIOS",
+                payload: json
+            });  */
+        }); 
     };
 };
 
@@ -111,15 +117,15 @@ export function setLocation(location) {
     };
 };
 
-export function buscarPedidos(){
-        return function (dispatch){
-           return fetch("http://localhost:4000/pedidos/pedidosreparto/Repartir")
-               .then(response => response.json())
-               .then(json => {
-                   dispatch({
-                       type: "GET_PEDIDOS",
-                       payload: json
-                   }); 
-               });
-        };
-    }
+export function buscarEnvio(reparto){
+    return function (dispatch){
+        return fetch("http://localhost:4000/envios/envios/" + reparto)
+            .then(response => response.json())
+            .then(json => {
+                dispatch({
+                    type: "GET_ENVIOS",
+                    payload: json
+                }); 
+            });
+    };
+}

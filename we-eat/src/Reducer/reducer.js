@@ -4,9 +4,10 @@ const initialState = {
     loginState:""/* [{"autenticated":"LoggedIn"}] */,
     user: [],
     clienteyRestaurantes:[],
-    pedidos:[],
+    envios:[],
     loading: true,
-    location: ""
+    location: "", 
+    pedidos:[]
   }
 
   const rootReducer = (state = initialState, action) => {
@@ -44,6 +45,11 @@ const initialState = {
         return{
           ...state,
           location: action.payload
+        }
+      case 'GET_ENVIOS':
+        return{
+          ...state,
+          envios: action.payload
         }
       
       default:
