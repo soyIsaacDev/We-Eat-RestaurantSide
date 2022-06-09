@@ -28,7 +28,9 @@ export default function SignIn(props) {
         e.preventDefault();
         console.log("en Login Onsubmit --> " + JSON.stringify(input))
         dispatch(postAuth(input))
-        dispatch(postLoginSession(input, tipoUsuario));
+        setTimeout(() => {
+            dispatch(postLoginSession(input, tipoUsuario))
+        }, 500);
     }
     const location = useLocation();
     console.log(location);

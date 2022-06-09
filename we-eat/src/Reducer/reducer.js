@@ -7,7 +7,8 @@ const initialState = {
     envios:[],
     loading: true,
     location: "", 
-    pedidos:[]
+    pedidos:[],
+    envioAsignado: ""
   }
 
   const rootReducer = (state = initialState, action) => {
@@ -50,6 +51,11 @@ const initialState = {
         return{
           ...state,
           envios: action.payload
+        }
+      case 'GET_ENVIO_ASIGNADO':
+        return{
+          ...state,
+          envioAsignado: action.payload
         }
       
       default:

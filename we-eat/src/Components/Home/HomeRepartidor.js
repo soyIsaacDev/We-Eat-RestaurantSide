@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
-import { getPedidos, cambiarStatus, buscarEnvio, enviar } from '../../Actions/actions';
+import { cambiarStatus, buscarEnvio, cambiarReparto } from '../../Actions/actions';
 import s from "./Home.module.css";
 
 export default function Home() {
 
   const repartidor = useSelector((state) => state.loginState);
-  const pedido = useSelector((state) => state.pedidos);
+  const pedido = useSelector((state) => state.envios);
   const [estado, setEstado] = useState(true);
   const dispatch = useDispatch();
 
@@ -24,21 +24,22 @@ export default function Home() {
   }, []);
 
   const cambiarAAceptarReparto = function(e, p){
-    p.status = "Aceptado"
-    dispatch(enviar(p.id, "Aceptado" ))
+    //p.status = "Aceptado"
+    dispatch(cambiarReparto(p.Envio.id, "Aceptado" ))
+    dispatch(buscarEnvio("Aceptado"));
     setEstado(!estado);
   }
 
   const avisarLlegada = function(e, p){
     p.status = "Entregado"
-    dispatch(cambiarStatus(p.id, "Entrega_Lista" ))
+    dispatch(cambiarReparto(p.Envio.id, "Entrega_Lista" ))
     setEstado(!estado);
   }
 
   const cambiarAEntregado = function(e, p){
     p.status = "Entregado"
-    dispatch(cambiarStatus(p.id, "Entregado" ))
-    dispatch(enviar(p.id, "Entregado" ))
+    dispatch(cambiarStatus(p.Envio.id, "Entregado" ))
+    dispatch(cambiarReparto(p.Envio.id, "Entregado" ))
     setEstado(!estado);
   }
   
@@ -57,9 +58,11 @@ export default function Home() {
         <div className={s.boton}></div>      
       </div>
       <p></p>
+      {console.log(pedido)};
+      {pedido? <div></div> : <div></div>}
       {pedido.map((p) =>{
         console.log(p.status);
-        if(p.reparto === "Buscando Repartidor"){
+        if(p.Envio.reparto === "Buscando Repartidor"){
           return(
             <div className={s.pedidowrap}>
               <div className={s.cantidad}>{p.cantidad}</div>
@@ -69,8 +72,12 @@ export default function Home() {
               <button className={s.boton} onClick={(e) => cambiarAAceptarReparto(e,p)}>Aceptar Reparto</button>
             </div>          
           )
-        }
-        if(p.reparto === "Aceptado"){
+        }}
+        )
+      }
+
+
+        {/* if(p.Envio.reparto === "Aceptado"){
             return(
               <div className={s.pedidowrap}>
                 <div className={s.cantidad}>{p.cantidad}</div>
@@ -81,7 +88,7 @@ export default function Home() {
               </div>          
             )
           }
-          if(p.status === "Entrega_Lista"){
+          if(p.Envio.reparto === "Entrega_Lista"){
             return(
               <div className={s.pedidowrap}>
                 <div className={s.cantidad}>{p.cantidad}</div>
@@ -91,8 +98,7 @@ export default function Home() {
                 <button className={s.boton} onClick={(e) => cambiarAEntregado(e,p)}>Entregar</button>
               </div>          
             )
-          }
-      })}
+          } */}
     </div>
    )
 }

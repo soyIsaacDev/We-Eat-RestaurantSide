@@ -119,11 +119,24 @@ export function setLocation(location) {
 
 export function buscarEnvio(reparto){
     return function (dispatch){
-        return fetch("http://localhost:4000/envios/envios/" + reparto)
+        return fetch("http://localhost:4000/pedidos/pedidoAEnvio/" + reparto)
             .then(response => response.json())
             .then(json => {
                 dispatch({
                     type: "GET_ENVIOS",
+                    payload: json
+                }); 
+            });
+    };
+}
+
+export function cambiarReparto(pedidoId, reparto){
+    return function (dispatch){
+        return fetch("http://localhost:4000/envios/cambiarReparto/"+ pedidoId +"/" + reparto)
+            .then(response => response.json())
+            .then(json => {
+                dispatch({
+                    type: "GET_ENVIO_ASIGNADO",
                     payload: json
                 }); 
             });
