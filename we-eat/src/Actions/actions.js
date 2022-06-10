@@ -130,9 +130,51 @@ export function buscarEnvio(reparto){
     };
 }
 
-export function cambiarReparto(pedidoId, reparto){
+export function cambiarReparto(pedidoId, reparto, RepartidorId){
     return function (dispatch){
-        return fetch("http://localhost:4000/envios/cambiarReparto/"+ pedidoId +"/" + reparto)
+        return fetch("http://localhost:4000/envios/cambiarReparto/"+ pedidoId +"/" + reparto +"/"+RepartidorId)
+            .then(response => response.json())
+            .then(json => console.log(json))
+    };
+}
+
+export function buscarEnvioAceptado(envioId){
+    return function (dispatch){
+        return fetch("http://localhost:4000/pedidos/pedidoEnReparto/" + envioId)
+            .then(response => response.json())
+            .then(json => {
+                dispatch({
+                    type: "GET_ENVIO_ASIGNADO",
+                    payload: json
+                }); 
+            });
+    };
+}
+
+export function buscarRepartidor(repartidorId){
+    return function (dispatch){
+        return fetch("http://localhost:4000/repartidor/buscarRepartidor/" + repartidorId)
+            .then(response => response.json())
+            .then(json => {
+                dispatch({
+                    type: "GET_REPARTIDOR",
+                    payload: json
+                }); 
+            });
+    };
+}
+
+export function cambiarStatusRepartidor(idRepartidor, status){
+    return function (dispatch){
+        return fetch("http://localhost:4000/repartidor/cambiarStatusRepartidor/"+ idRepartidor +"/" + status)
+            .then(response => response.json())
+            .then(json => console.log(json))
+    };
+}
+
+export function buscarEnvioAceptadoXRepartidor(RepartidorId){
+    return function (dispatch){
+        return fetch("http://localhost:4000/pedidos/pedidoEnEntrega/" + RepartidorId)
             .then(response => response.json())
             .then(json => {
                 dispatch({
