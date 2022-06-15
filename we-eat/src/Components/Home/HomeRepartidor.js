@@ -21,18 +21,19 @@ export default function Home() {
   useEffect(() => {
     dispatch(buscarRepartidor(usuario.id));
   }, []);
+  // para revisar si hay pedidos ya asignados; si el array = 0 es que NO hay pedido asignado
+  var hayPedidoAsignado = Array.isArray(pedidoAsignado) && pedidoAsignado.length;
 
- /*  useEffect(() => {
-    dispatch(buscarEnvioAceptadoXRepartidor(repartidor.id))
-  }, [repartidor]); */
-  
   useEffect(() => {
     console.log(repartidor.estatus);
     dispatch(buscarEnvioAceptadoXRepartidor(repartidor.id))
-    const interval = setInterval(() => {
+
+    if(hayPedidoAsignado === 0){
+      const interval = setInterval(() => {
       buscarEnviosaReparto();
     }, 1000);
-    return () => clearInterval(interval);
+    return () => clearInterval(interval);}
+    
     
   }, [repartidor]);
 
@@ -82,6 +83,18 @@ export default function Home() {
         console.log(p);
         return(
           <div>
+            <NavBarRepartidor></NavBarRepartidor>
+            
+            <div className={s.pedido}> Pedido</div>
+            <p></p>
+            <p></p>
+            <div className={s.titulowrap}>
+              <div className={s.cantidad}>Cantidad</div>
+              <div className={s.platillo}>Platillo</div>
+              <div className={s.platillo}>Direccion Restaurante</div>
+              <div className={s.boton}></div>      
+            </div>
+            <p></p>
             <div className={s.pedidowrap}>
                     <div className={s.cantidad}>{p.cantidad}</div>
                     <div className={s.platillo}> {p.Platillos[0].nombre}</div>
@@ -94,9 +107,6 @@ export default function Home() {
       }
       return (
         <div>
-          <h1>Bienvenido a We-Eat</h1>
-          <p></p>
-          <p></p>
           <NavBarRepartidor></NavBarRepartidor>
           <p></p>
           <h2> Pedido</h2>
@@ -133,9 +143,6 @@ export default function Home() {
     }
     return (
       <div>
-        <h1>Bienvenido a We-Eat</h1>
-        <p></p>
-        <p></p>
         <NavBarRepartidor></NavBarRepartidor>
         <p></p>
         <h2> Pedido</h2>
@@ -172,9 +179,6 @@ export default function Home() {
     
     return (
       <div>
-        <h1>Bienvenido a We-Eat</h1>
-        <p></p>
-        <p></p>
         <NavBarRepartidor></NavBarRepartidor>
         <p></p>
         <h2> Pedido</h2>

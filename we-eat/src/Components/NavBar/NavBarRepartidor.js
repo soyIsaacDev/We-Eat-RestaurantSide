@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { buscarRepartidor, cambiarStatusRepartidor } from '../../Actions/actions';
 
-import s from "./navBar.module.css";
+import s from "./navBarRepartidor.module.css";
 
 
 
@@ -49,6 +49,7 @@ export default function NavBarRepartidor() {
 
   return (
       <div className={s.navBar}>
+          <div className={s.bienvenido}>Bienvenido a We-Eat</div>
           <button className={s.menu_button} onClick={(e) => buscarPedidos(e)}  >
             Buscar Pedidos
           </button>     

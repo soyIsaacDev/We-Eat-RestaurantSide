@@ -72,7 +72,7 @@ export default function SignIn(props) {
 
             {loginState === "LoggedIn" ? (
                 tipoUsuario=== "Repartidor"?(
-                    <Navigate to="/HomeRepartidor" ></Navigate>
+                    <Navigate to="/cambioHomeRepartidor" ></Navigate>
                     ):
                     tipoUsuario=== "Restaurante"?(<Navigate to="/Home" ></Navigate>):(<div></div>)
                 ) 
