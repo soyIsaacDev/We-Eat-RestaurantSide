@@ -9,6 +9,7 @@ import {
   buscarRepartidor,
   cambiarStatusRepartidor,
   buscarEnvioAceptadoXRepartidor,
+  clearEnvios
 } from "../../Actions/actions";
 
 import NavBarRepartidor from "../NavBar/NavBarRepartidor";
@@ -19,6 +20,7 @@ export default function HomeRepartidor() {
   const repartidor = useSelector((state) => state.repartidor);
   const envios = useSelector((state) => state.envios);
   const envioAsignado = useSelector((state) => state.envioAsignado);
+  const [cambioBoton, setCambioBoton] = useState(9);
   const [estado, setEstado] = useState(true);
   const dispatch = useDispatch();
 
@@ -42,21 +44,22 @@ export default function HomeRepartidor() {
     : // Hay envio ya Asignado; datos estan en envioAsignado
       (pedidoAEntregar = envioAsignado[0]);
   console.log(pedidoAEntregar);
+
   var StatusReparto = 0;
   pedidoAEntregar
     ? (StatusReparto = pedidoAEntregar.Envio.reparto)
     : (StatusReparto = 0);
   console.log(StatusReparto);
 
-  //StatusReparto !== "Entregado"
-
   useEffect(() => {
     console.log(repartidor.estatus);
     dispatch(buscarEnvioAceptadoXRepartidor(repartidor.id));
 
     if (
-      (hayEnvioAsignado === 0 && hayEnvioAsignado2 === 0) ||
-      StatusReparto === "Entregado"
+      (hayEnvioAsignado === 0 && hayEnvioAsignado2 === 0) 
+      || StatusReparto === "Entregado" 
+      || hayEnvioAsignado === false && hayEnvioAsignado2 === 0
+      || hayEnvioAsignado === 0 && hayEnvioAsignado2 === false
     ) {
       console.log("Envios Asignados " + hayEnvioAsignado + hayEnvioAsignado2);
       const interval = setInterval(() => {
@@ -79,35 +82,58 @@ export default function HomeRepartidor() {
   };
 
   //var botondeAviso = cambiarAAceptarReparto;
-  var cambioBoton = 987;
 
   const cambiarAAceptarReparto = function(e, p) {
     //p.status = "Aceptado"
+    StatusReparto="Aceptado";
     dispatch(cambiarReparto(p.Envio.id, "Aceptado", repartidor.id));
     dispatch(cambiarStatusRepartidor(usuario.id, "Repartiendo"));
     dispatch(buscarEnvioAceptado(p.Envio.id));
     dispatch(buscarRepartidor(usuario.id));
+    dispatch(clearEnvios());
     setEstado(!estado);
   };
 
   const avisarLlegadaARestaurante = function(e, p) {
     //NOTAAAA:   -->>   Agregar Status EntregadoXRestaurante a modelo Envios
     //dispatch(cambiarReparto(p.Envio.id, "Entrega_Lista",  repartidor.id ))
+    StatusReparto="En_Restaurante";
     dispatch(cambiarReparto(p.Envio.id, "En_Restaurante", repartidor.id));
     dispatch(buscarEnvioAceptado(p.Envio.id));
     setEstado(!estado);
   };
 
-  const recibirEnvio = function(e, p) {};
+  const recibirEnvio = function(e, p) {
+    StatusReparto="Recibido";
+    dispatch(cambiarReparto(p.Envio.id, "Recibido", repartidor.id));
+    dispatch(buscarEnvioAceptado(p.Envio.id));
+  };
+  /* const cambiarARepartiendo = function(e, p) {
+    setCambioBoton(3);
+    dispatch(cambiarReparto(p.Envio.id, "Repartiendo", repartidor.id));
+    dispatch(buscarEnvioAceptado(p.Envio.id));
+  }; */
 
-  const avisarLlegadaCliente = function(e, p) {};
+  const avisarLlegadaCliente = function(e, p) {
+    StatusReparto="Repartiendo";
+    setCambioBoton(4);
+    dispatch(cambiarReparto(p.Envio.id, "Repartiendo", repartidor.id));
+    dispatch(buscarEnvioAceptado(p.Envio.id));
+  };
 
   const cambiarAEntregado = function(e, p) {
-    p.status = "Entregado";
+    StatusReparto="Entregado";
+    pedidoAEntregar = null;
+    console.log("Se cambio a Entregado" + pedidoAEntregar);
     dispatch(cambiarStatus(p.Envio.id, "Entregado"));
     dispatch(cambiarReparto(p.Envio.id, "Entregado", repartidor.id));
+    dispatch(buscarEnvioAceptado(p.Envio.id));
+    dispatch(cambiarStatusRepartidor(usuario.id, "Activo"));
+    
     setEstado(!estado);
   };
+
+  console.log(pedidoAEntregar)
 
   return (
     <div>
@@ -119,7 +145,7 @@ export default function HomeRepartidor() {
         <div className={s.platillo}>Direccion Restaurante</div>
         <div className={s.boton}></div>
       </div>
-      {StatusReparto !== "Entregado"}
+
       {pedidoAEntregar ? (
         <div className={s.pedidowrap}>
           <div className={s.cantidad}>{pedidoAEntregar.cantidad}</div>
@@ -132,59 +158,85 @@ export default function HomeRepartidor() {
             {pedidoAEntregar.Restaurantes[0].direccion}
           </div>
           <div>
-            {(() => {
-              // No esta funcionando ya que cambioBoton se resetea cada que se renderiza; tendria que ver
-              //  como hacer el switch dentro de una funcion para tener acceso solo en el scope de la funcion
-              switch (cambioBoton) {
-                case 1:
-                  cambioBoton = 2;
-                  console.log("Cambio Boton  "+cambioBoton);
+
+          {(() => {
+              switch (StatusReparto) {
+                case "Aceptado":
                   return (
                     <button className={s.boton} onClick={(e) => avisarLlegadaARestaurante(e, pedidoAEntregar) }>
                       Llegada a Restaurante
                     </button>
                   );
-                /* case "Llegada a Restaurante":
-                textoBoton = "Recibir Envio";
-                return(<button className={s.boton} onClick={(e) => avisarLlegadaARestaurante(e,pedidoAEntregar)}>{textoBoton}</button>); */
-                /* case "Llegada a Restaurante":
-                  textoBoton = "Llegada con Cliente";
+                  case "En_Restaurante":
                   return (
-                    <button
-                      className={s.boton}
-                      onClick={(e) => avisarLlegadaCliente(e, pedidoAEntregar)}
-                    >
-                      {textoBoton}
+                    <button className={s.boton} onClick={(e) => recibirEnvio(e, pedidoAEntregar) }>
+                      Recibir Envio
                     </button>
                   );
-                case "Llegada con Cliente":
-                  textoBoton = "Entregado";
+                  case  "Recibido":  //Cambiar en Modelo a Repartiendo
                   return (
-                    <button
-                      className={s.boton}
-                      onClick={(e) => avisarLlegadaCliente(e, pedidoAEntregar)}
-                    >
-                      {textoBoton}
+                    <button className={s.boton} onClick={(e) => avisarLlegadaCliente(e, pedidoAEntregar) }>
+                      Llegada Cliente
                     </button>
-                  ); */
-                default:
-                  cambioBoton = 1;
+                  );
+                  case "Repartiendo": //Cambiar en Modelo a Entregando
                   return (
-                    <button
-                      className={s.boton}
-                      onClick={(e) =>
-                        cambiarAAceptarReparto(e, pedidoAEntregar)
-                      }
-                    >
+                    <button className={s.boton} onClick={(e) => cambiarAEntregado(e, pedidoAEntregar) }>
+                      Entregar
+                    </button>
+                  );
+                  case  "Entregado":
+                  return (
+                    <div></div>
+                  );
+                default:
+                  return (
+                    <button className={s.boton} onClick={(e) =>cambiarAAceptarReparto(e, pedidoAEntregar) }>
                       Aceptar Envio
                     </button>
                   );
               }
             })()}
+            
+            {/* {(() => {
+              switch (cambioBoton) {
+                case 1:
+                  return (
+                    <button className={s.boton} onClick={(e) => avisarLlegadaARestaurante(e, pedidoAEntregar) }>
+                      Llegada a Restaurante
+                    </button>
+                  );
+                  case 2:
+                  return (
+                    <button className={s.boton} onClick={(e) => recibirEnvio(e, pedidoAEntregar) }>
+                      Recibir Envio
+                    </button>
+                  );
+                  case 3:
+                  return (
+                    <button className={s.boton} onClick={(e) => avisarLlegadaCliente(e, pedidoAEntregar) }>
+                      Llegada con Cliente
+                    </button>
+                  );
+                  case 4:
+                  return (
+                    <button className={s.boton} onClick={(e) => cambiarAEntregado(e, pedidoAEntregar) }>
+                      Entregar
+                    </button>
+                  );
+                default:
+                  return (
+                    <button className={s.boton} onClick={(e) =>cambiarAAceptarReparto(e, pedidoAEntregar) }>
+                      Aceptar Envio
+                    </button>
+                  );
+              }
+            })()} */}
+
           </div>
         </div>
       ) : (
-        <div> </div>
+        <div> Sin Envio Asignado </div>
       )}
     </div>
   );

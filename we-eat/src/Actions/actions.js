@@ -184,3 +184,12 @@ export function buscarEnvioAceptadoXRepartidor(RepartidorId){
             });
     };
 }
+
+export function clearEnvios(){
+    return function (dispatch){
+        dispatch({
+            type: "GET_ENVIOS",
+            payload: ""
+        }); 
+    };
+}
