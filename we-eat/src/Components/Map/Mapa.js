@@ -38,7 +38,7 @@ export default function Mapa(properties) {
     useEffect(() => {
       setTimeout(() => {
           handleMap();
-      }, 500);
+      }, 700);
     }, [])
 
     /* useEffect(() => {

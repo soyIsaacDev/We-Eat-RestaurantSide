@@ -14,7 +14,6 @@ import Map from "./Components/Map/Mapa";
 import Repartidor from "./Components/Repartidor/Repartidor";
 import UbicacionRepartidor from "./Components/Repartidor/UbicacionRepartidor";
 import HomeRepartidor from "./Components/Home/HomeRepartidor";
-import HomeRepartidorModificada from "./Components/Home/HomeRepartidor2";
 function App() { 
 
   return (
@@ -29,7 +28,6 @@ function App() {
             
                         
             <Route element={<ProtectedRoutes />}>
-                <Route path="/cambioHomeRepartidor" element = {<HomeRepartidorModificada/>}/>
                 <Route exact path="/Home" element = { <Home/> } />
                 <Route exact path="/HomeRepartidor" element = { <HomeRepartidor/> } />
                 <Route exact path="/agregarRestaurant" element = { <AgregarRestaurant/> } />

@@ -30,7 +30,7 @@ export default function SignIn(props) {
         dispatch(postAuth(input))
         setTimeout(() => {
             dispatch(postLoginSession(input, tipoUsuario))
-        }, 500);
+        }, 700);
     }
     const location = useLocation();
     console.log(location);
@@ -72,7 +72,7 @@ export default function SignIn(props) {
 
             {loginState === "LoggedIn" ? (
                 tipoUsuario=== "Repartidor"?(
-                    <Navigate to="/cambioHomeRepartidor" ></Navigate>
+                    <Navigate to="/HomeRepartidor" ></Navigate>
                     ):
                     tipoUsuario=== "Restaurante"?(<Navigate to="/Home" ></Navigate>):(<div></div>)
                 ) 

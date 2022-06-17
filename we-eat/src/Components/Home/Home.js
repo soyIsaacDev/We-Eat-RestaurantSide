@@ -15,6 +15,7 @@ export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    //Para saber que restaurant es
     dispatch(getClienteyRestaurantes(restauranteroId));
   }, []);
 
@@ -23,10 +24,11 @@ export default function Home() {
     if(restaurant){
       if(restaurant.length){
       dispatch(getPedidos(restaurant[0].id));
+      setEstado(!estado);
       }
     }
     // To keep looking for New Orders after loading
-    const interval = setInterval(() =>{
+    /* const interval = setInterval(() =>{
       if(restaurant){
         if(restaurant.length){
         dispatch(getPedidos(restaurant[0].id));
@@ -34,17 +36,24 @@ export default function Home() {
       }
     }, 30000);
     
-    return() => clearInterval(interval);
+    return() => clearInterval(interval); */
     
   }, [restaurant]);
 
+  // Cambiar automaticamente el Status del pedido a Recibido
   useEffect(() => {
+    console.log(pedido);
     pedido.map((p) =>{
       if(p.status==="Colocado"){
         dispatch(cambiarStatus(p.id, "Recibido" ));
+        // Y mostrarlo
+        setTimeout(() => {
+          dispatch(getPedidos(restaurant[0].id));
+        }, 200);
       }
     })
   },[pedido])
+  
 
   const cambiarAEnProceso = function(e, p){
     p.status = "En_Proceso"
@@ -96,7 +105,7 @@ export default function Home() {
 
       <div className={s.proceso}>Recibidos</div>
       {pedido.map((p) =>{
-        console.log(p.status);
+        
         if(p.status === "Recibido"){
           return(
             <div className={s.pedidowrap}>
@@ -113,8 +122,7 @@ export default function Home() {
 
       <div className={s.proceso}>En Proceso</div>
       {pedido.map((p) =>{
-        console.log("p "+JSON.stringify(p))
-        console.log(p.status);
+        
         if(p.status === "En_Proceso"){ // NOTA: agregar condicion de reparto para cambiar rapidamente el tipo de boton
           return(
             <div className={s.pedidowrap}>
@@ -140,7 +148,7 @@ export default function Home() {
 
       <div className={s.proceso}>Listo</div>
       {pedido.map((p) =>{
-        console.log(p.status);
+        
         if(p.status === "Listo"){
           return(
             <div className={s.pedidowrap}>

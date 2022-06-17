@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
-import { buscarRepartidor, cambiarStatusRepartidor } from '../../Actions/actions';
+import { buscarRepartidor, cambiarStatusRepartidor, buscarEnvio, clearEnvios } from '../../Actions/actions';
 
 import s from "./navBarRepartidor.module.css";
 
@@ -16,19 +16,19 @@ export default function NavBarRepartidor() {
   const buscarPedidos = function(e){
     dispatch(cambiarStatusRepartidor(usuario.id, "Activo"));
     dispatch(buscarRepartidor(usuario.id));
-    //enBuscaDeEnvios()
+    dispatch(buscarEnvio("Buscando Repartidor"));
   }
 
   const pausarPedidos = function(e){
     dispatch(cambiarStatusRepartidor(usuario.id, "Pausa"));
     dispatch(buscarRepartidor(usuario.id));
-    //stopBusquedaEnvios();
+    dispatch(clearEnvios());
   }
 
   const loggOut = function(e){
     dispatch(cambiarStatusRepartidor(usuario.id, "Pausa"));
     dispatch(buscarRepartidor(usuario.id));
-
+    dispatch(clearEnvios());
   }
 
   /* let interval = 0;
