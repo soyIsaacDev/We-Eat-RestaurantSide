@@ -95,22 +95,36 @@ export default function HomeRepartidor() {
   };
 
   const avisarLlegadaARestaurante = function(e, p) {
-    if(pedidoAEntregar.status === "Listo"){
+    
       StatusReparto="En_Restaurante";
       dispatch(cambiarReparto(p.Envio.id, "En_Restaurante", repartidor.id));
+      dispatch(buscarEnvioAceptado(p.Envio.id));
+      setTimeout(() => {
+        dispatch(buscarEnvioAceptado(p.Envio.id));
+      }, 2000);
+      setTimeout(() => {
+        dispatch(buscarEnvioAceptado(p.Envio.id));
+      }, 10000);
+      setEstado(!estado);
+    
+  };
+
+  const recibirEnvio = function(e, p) {
+    if(pedidoAEntregar.status === "En_Camino"){
+      StatusReparto="Repartiendo";
+      dispatch(cambiarReparto(p.Envio.id, "Repartiendo", repartidor.id));
       dispatch(buscarEnvioAceptado(p.Envio.id));
       setEstado(!estado);
     }
     else{
       alert("Solicitar al Restaurante Liberar Pedido");
+      setTimeout(() => {
+        dispatch(buscarEnvioAceptado(p.Envio.id));
+      }, 500);
+      setTimeout(() => {
+        dispatch(buscarEnvioAceptado(p.Envio.id));
+      }, 2000);
     }
-  };
-
-  const recibirEnvio = function(e, p) {
-    StatusReparto="Repartiendo";
-    dispatch(cambiarReparto(p.Envio.id, "Repartiendo", repartidor.id));
-    dispatch(buscarEnvioAceptado(p.Envio.id));
-    setEstado(!estado);
   };
 
   const avisarLlegadaCliente = function(e, p) {

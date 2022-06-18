@@ -28,7 +28,7 @@ export default function Home() {
       }
     }
     // To keep looking for New Orders after loading
-    /* const interval = setInterval(() =>{
+    const interval = setInterval(() =>{
       if(restaurant){
         if(restaurant.length){
         dispatch(getPedidos(restaurant[0].id));
@@ -36,7 +36,7 @@ export default function Home() {
       }
     }, 30000);
     
-    return() => clearInterval(interval); */
+    return() => clearInterval(interval);
     
   }, [restaurant]);
 
@@ -62,9 +62,10 @@ export default function Home() {
   }
 
   const enviarAReparto= function(e, p){
-    //p.reparto = "Repartir"
     dispatch(enviar("Buscando Repartidor", p.id));
-    //dispatch(buscarEnvio("Buscando Repartidor" ));
+    setTimeout(() => {
+      dispatch(getPedidos(restaurant[0].id));
+    }, 100);
     setEstado(!estado);
   }
 
@@ -77,6 +78,9 @@ export default function Home() {
   const cambiarAEnReparto = function(e, p){
     p.reparto = "En_Camino"
     dispatch(cambiarStatus(p.id, "En_Camino" ))
+    setTimeout(() => {
+      dispatch(getPedidos(restaurant[0].id));
+    }, 100);
     setEstado(!estado);
   }
 
@@ -105,24 +109,25 @@ export default function Home() {
 
       <div className={s.proceso}>Recibidos</div>
       {pedido.map((p) =>{
-        
         if(p.status === "Recibido"){
           return(
-            <div className={s.pedidowrap}>
-              <div className={s.cantidad}>{p.id}</div>
-              <div className={s.cantidad}>{p.cantidad}</div>
-              <div className={s.platillo}>{p.Platillos[0].nombre}</div>
-              <div className={s.notas}> {p.notas}</div>
-              <div className={s.reparto}></div>
-              <button className={s.boton} onClick={(e) => cambiarAEnProceso(e,p)}>Procesar</button>
-            </div>          
+            <div>
+              
+              <div className={s.pedidowrap}>
+                <div className={s.cantidad}>{p.id}</div>
+                <div className={s.cantidad}>{p.cantidad}</div>
+                <div className={s.platillo}>{p.Platillos[0].nombre}</div>
+                <div className={s.notas}> {p.notas}</div>
+                <div className={s.reparto}></div>
+                <button className={s.boton} onClick={(e) => cambiarAEnProceso(e,p)}>Procesar</button>
+              </div>   
+            </div>       
           )
         }
       })}
 
       <div className={s.proceso}>En Proceso</div>
       {pedido.map((p) =>{
-        
         if(p.status === "En_Proceso"){ // NOTA: agregar condicion de reparto para cambiar rapidamente el tipo de boton
           return(
             <div className={s.pedidowrap}>
@@ -130,16 +135,19 @@ export default function Home() {
               <div className={s.cantidad}>{p.cantidad}</div>
               <div className={s.platillo}>{p.Platillos[0].nombre}</div>
               <div className={s.notas}> {p.notas}</div>
-              {p.Envio? 
+              {/* Dependiendo del Status de Reparto */}
+              {!p.Envio? 
                 <div className={s.enviowrap}>
-                  <div className={s.reparto_e}>{p.Envio.reparto}</div>
-                  <button className={s.boton_e} onClick={(e) => cambiarAListo(e,p)}>Listo</button>
+                  <div className={s.reparto_e}></div>
+                                                    {/* Aun sin Reparto -> Buscar un Repartidor */}
+                  <button className={s.boton_e} onClick={(e) => enviarAReparto(e,p)}>Enviar</button>
                 </div>
                 :(
                   <div className={s.enviowrap}>
-                    <div className={s.reparto_e}></div>
-                    <button className={s.boton_e} onClick={(e) => enviarAReparto(e,p)}>Enviar</button>
-                  </div>
+                    <div className={s.reparto_e}>{p.Envio.reparto}</div>
+                                                  {/* Ya se encuentra con Repartidor Asignado -> Pasar a Envio Listo */}
+                    <button className={s.boton_e} onClick={(e) => cambiarAListo(e,p)}>Listo</button>
+                </div>
               )}
             </div>          
           )
@@ -148,7 +156,6 @@ export default function Home() {
 
       <div className={s.proceso}>Listo</div>
       {pedido.map((p) =>{
-        
         if(p.status === "Listo"){
           return(
             <div className={s.pedidowrap}>
@@ -157,7 +164,7 @@ export default function Home() {
               <div className={s.platillo}>{p.Platillos[0].nombre}</div>
               <div className={s.notas}> {p.notas}</div>
               <div className={s.reparto}>{p.Envio.reparto}</div>
-              {p.Envio.reparto === "Aceptado"? 
+              {p.Envio.reparto === "En_Restaurante"? 
                 <button className={s.boton} onClick={(e) => cambiarAEnReparto(e,p)}>Entregar</button>
                 :
                 <div className={s.boton}></div> 
