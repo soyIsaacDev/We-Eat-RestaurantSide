@@ -72,6 +72,12 @@ export default function Home() {
   const cambiarAListo = function(e, p){
     p.status = "Listo"
     dispatch(cambiarStatus(p.id, "Listo" ))
+    setTimeout(() => {
+      dispatch(getPedidos(restaurant[0].id));
+    }, 1500);
+    setTimeout(() => {
+      dispatch(getPedidos(restaurant[0].id));
+    }, 7000);
     setEstado(!estado);
   }
 
@@ -83,12 +89,7 @@ export default function Home() {
     }, 100);
     setEstado(!estado);
   }
-
-  /* const buscarEnvio = function(e, p){
-    dispatch(buscarEnvio("Buscando Repartido", p.id ));
-    setEstado(!estado);
-  } */
-  
+    
   return (
     <div>
       <h1>Bienvenido a We-Eat</h1>
