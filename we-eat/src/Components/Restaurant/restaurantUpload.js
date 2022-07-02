@@ -8,6 +8,8 @@ import Mapa from "../Map/Mapa";
 
 import style from "./restautantUpload.module.css";
 
+const host = "https://weeatapi.herokuapp.com";
+
 export default function Restaurant() {
     let navigate = useNavigate();;
     /* const [input, setInput] = useState({ 
@@ -68,7 +70,7 @@ export default function Restaurant() {
          }
 
         await fetch(
-			'http://localhost:4000/restaurantes/agregarRestaurante',
+			`${host}/restaurantes/agregarRestaurante`,
 			{
 				method: 'POST',
                 body: formData,

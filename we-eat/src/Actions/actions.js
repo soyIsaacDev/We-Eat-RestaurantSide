@@ -1,9 +1,11 @@
 // ACTIONS
 
+const host = "https://weeatapi.herokuapp.com";
+
 export function getUser(){
     console.log("GetUser Despachado")
     return function (dispatch){
-       return fetch("http://localhost:4000/profile")
+       return fetch(`${host}/profile`)
            .then(response => response.json())
            .then(json => {
                console.log("respuesta getUser"+json)
@@ -24,7 +26,7 @@ export function loginEstado() {
 export function getLoginSession(){
     return function (dispatch){
         console.log("getLoginSession")
-       return fetch("http://localhost:4000/")
+       return fetch(`${host}`)
            .then(response => response.json())
            .then(json => {
                console.log("Respuesta Session -->>>"+JSON.stringify(json))
@@ -38,7 +40,7 @@ export function getLoginSession(){
 
 export function getCorporativo(){
     return function (dispatch){
-       return fetch("http://localhost:4000/restaurantes/corporativo")
+       return fetch(`${host}/restaurantes/corporativo`)
            .then(response => response.json())
            .then(json => {
                console.log(json)
@@ -60,7 +62,7 @@ export function setLoading() {
 export function getClienteyRestaurantes (restauranteroId){
     console.log("GETCLIENTE Y RESTAURANTES EJECUTADO")
     return function (dispatch){
-       return fetch("http://localhost:4000/clienteRestaurantero/clienterestaurantero/"+ restauranteroId)
+       return fetch(`${host}/clienteRestaurantero/clienterestaurantero/`+ restauranteroId)
            .then(response => response.json())
            .then(json => {
                console.log("Respuesta de getClienteyRestaurantes   "+json)
@@ -76,7 +78,7 @@ export function getClienteyRestaurantes (restauranteroId){
 export function getPedidos(RestauranteId ){
 console.log("GET PEDIDOS EJECUTADO")
     return function (dispatch){
-       return fetch("http://localhost:4000/pedidos/pedido/"+RestauranteId)
+       return fetch(`${host}/pedidos/pedido/`+RestauranteId)
            .then(response => response.json())
            .then(json => {
                dispatch({
@@ -90,7 +92,7 @@ console.log("GET PEDIDOS EJECUTADO")
 
 export function cambiarStatus( pedidoId, status){
     return function (dispatch){
-       return fetch("http://localhost:4000/pedidos/cambiarStatus/"+ pedidoId +"/"+status)
+       return fetch(`${host}/pedidos/cambiarStatus/`+ pedidoId +"/"+status)
            .then(response => response.json())
            .then(json => console.log(JSON.stringify(json))); 
     };
@@ -99,7 +101,7 @@ export function cambiarStatus( pedidoId, status){
 export function enviar(reparto, pedidoId){
     console.log(reparto);
     return function (dispatch){
-       return fetch("http://localhost:4000/envios/nuevoEnvio/" + reparto +"/" +  pedidoId)
+       return fetch(`${host}/envios/nuevoEnvio/` + reparto +"/" +  pedidoId)
            .then(response => response.json())
            .then(json => {
             /* dispatch({
@@ -119,7 +121,7 @@ export function setLocation(location) {
 
 export function buscarEnvio(reparto){
     return function (dispatch){
-        return fetch("http://localhost:4000/pedidos/pedidoAEnvio/" + reparto)
+        return fetch(`${host}/pedidos/pedidoAEnvio/` + reparto)
             .then(response => response.json())
             .then(json => {
                 dispatch({
@@ -132,7 +134,7 @@ export function buscarEnvio(reparto){
 
 export function cambiarReparto(pedidoId, reparto, RepartidorId){
     return function (dispatch){
-        return fetch("http://localhost:4000/envios/cambiarReparto/"+ pedidoId +"/" + reparto +"/"+RepartidorId)
+        return fetch(`${host}/envios/cambiarReparto/`+ pedidoId +"/" + reparto +"/"+RepartidorId)
             .then(response => response.json())
             .then(json => console.log(json))
     };
@@ -140,7 +142,7 @@ export function cambiarReparto(pedidoId, reparto, RepartidorId){
 
 export function buscarEnvioAceptado(envioId){
     return function (dispatch){
-        return fetch("http://localhost:4000/pedidos/pedidoEnReparto/" + envioId)
+        return fetch(`${host}/pedidos/pedidoEnReparto/` + envioId)
             .then(response => response.json())
             .then(json => {
                 dispatch({
@@ -153,7 +155,7 @@ export function buscarEnvioAceptado(envioId){
 
 export function buscarRepartidor(repartidorId){
     return function (dispatch){
-        return fetch("http://localhost:4000/repartidor/buscarRepartidor/" + repartidorId)
+        return fetch(`${host}/repartidor/buscarRepartidor/` + repartidorId)
             .then(response => response.json())
             .then(json => {
                 dispatch({
@@ -166,7 +168,7 @@ export function buscarRepartidor(repartidorId){
 
 export function cambiarStatusRepartidor(idRepartidor, status){
     return function (dispatch){
-        return fetch("http://localhost:4000/repartidor/cambiarStatusRepartidor/"+ idRepartidor +"/" + status)
+        return fetch(`${host}/repartidor/cambiarStatusRepartidor/`+ idRepartidor +"/" + status)
             .then(response => response.json())
             .then(json => console.log(json))
     };
@@ -174,7 +176,7 @@ export function cambiarStatusRepartidor(idRepartidor, status){
 
 export function buscarEnvioAceptadoXRepartidor(RepartidorId){
     return function (dispatch){
-        return fetch("http://localhost:4000/pedidos/pedidoEnEntrega/" + RepartidorId)
+        return fetch(`${host}/pedidos/pedidoEnEntrega/` + RepartidorId)
             .then(response => response.json())
             .then(json => {
                 dispatch({

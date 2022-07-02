@@ -3,6 +3,8 @@ import React, { useState } from "react";
 
 import style from "./restDetailsUpload.module.css";
 
+const host = "https://weeatapi.herokuapp.com";
+
 export default function RestaurantDetails() {
     
     const [input, setInput] = useState({ 
@@ -37,7 +39,7 @@ export default function RestaurantDetails() {
          }
          
 		await fetch(
-			'http://localhost:4000/restaurantes/agregarDetallesRestaurante',
+			`${host}/restaurantes/agregarDetallesRestaurante`,
 			{
 				method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

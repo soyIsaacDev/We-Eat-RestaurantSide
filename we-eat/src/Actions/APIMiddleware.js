@@ -1,4 +1,5 @@
 // Post a Servidor
+const host = "https://weeatapi.herokuapp.com";
 
 export function addClienteRestaurant(data){
     return function (dispatch){
@@ -19,7 +20,7 @@ export function addClienteRestaurant(data){
           }
           
           console.log(user);
-        await fetch('http://localhost:4000/ClienteRestaurantero/agregarclienterestaurantero', requestOptions)
+        await fetch(`${host}/ClienteRestaurantero/agregarclienterestaurantero`, requestOptions)
         .then(json => dispatch(postAuth(auth, user)))
         };
         postData();       
@@ -48,7 +49,7 @@ export function postAuth(data){
               body: JSON.stringify(data),
           };   
           console.log(data) ;
-          await fetch('http://localhost:4000/authcliente/login/password', requestOptions)
+          await fetch(`${host}/authcliente/login/password`, requestOptions)
             /* .then(response => response.json())
             .then(json => {
                 console.log("Sesion ESTABLECIDA")                
@@ -77,7 +78,7 @@ export function postLoginSession(data, tipoUsuario){
           };     
           console.log(data)
           if(tipoUsuario === "Restaurante" ){
-            await fetch('http://localhost:4000/authrestaurantero/sesionrestaurantero', requestOptions)
+            await fetch(`${host}/authrestaurantero/sesionrestaurantero`, requestOptions)
             .then(response => response.json())
             .then(json => {
                 dispatch(getLogginSession(json))
@@ -85,7 +86,7 @@ export function postLoginSession(data, tipoUsuario){
             });
           }
           else{
-            await fetch('http://localhost:4000/authrepartidor/SesionRepartidor', requestOptions)
+            await fetch(`${host}/authrepartidor/SesionRepartidor`, requestOptions)
             .then(response => response.json())
             .then(json => {
                 dispatch(getLogginSession(json))
@@ -107,7 +108,7 @@ export function addPlatillo(file, input){
                 console.log(pair[0]+ ', '+ pair[1]);
             }
 
-            await fetch('http://localhost:4000/restaurantes/agregarPlatillo',
+            await fetch(`${host}/restaurantes/agregarPlatillo`,
                 {
                     method: 'POST',
                     body: formData,
@@ -131,7 +132,7 @@ export function addRepartidor(data){
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
       };
-      await fetch('http://localhost:4000/repartidor/nuevoRepartidor', requestOptions)
+      await fetch(`${host}/repartidor/nuevoRepartidor`, requestOptions)
       };
       postData();       
 }
@@ -143,7 +144,7 @@ export function addUbicacionRepartidor(data){
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
       };
-      await fetch('http://localhost:4000/repartidor/ubicacionRepartidor', requestOptions)
+      await fetch(`${host}/repartidor/ubicacionRepartidor`, requestOptions)
       };
       postUbicacion();       
 }
