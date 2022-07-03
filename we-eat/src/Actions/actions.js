@@ -1,6 +1,7 @@
 // ACTIONS
 
 const host = "https://weeatapi.herokuapp.com";
+const localhost = "localhost"
 
 export function getUser(){
     console.log("GetUser Despachado")
