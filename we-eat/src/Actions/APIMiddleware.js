@@ -1,5 +1,5 @@
 // Post a Servidor
-const host = "https://weeatapi.herokuapp.com";
+import { host } from "../host";
 
 export function addClienteRestaurant(data){
     return function (dispatch){

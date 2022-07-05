@@ -8,7 +8,7 @@ import Mapa from "../Map/Mapa";
 
 import style from "./restautantUpload.module.css";
 
-const host = "https://weeatapi.herokuapp.com";
+import {host} from "../../host.js"
 
 export default function Restaurant() {
     let navigate = useNavigate();;

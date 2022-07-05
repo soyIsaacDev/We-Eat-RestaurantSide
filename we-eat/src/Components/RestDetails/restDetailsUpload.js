@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import style from "./restDetailsUpload.module.css";
 
-const host = "https://weeatapi.herokuapp.com";
+import { host } from "../../host";
 
 export default function RestaurantDetails() {
     

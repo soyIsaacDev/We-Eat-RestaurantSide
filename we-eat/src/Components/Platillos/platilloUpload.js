@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { getClienteyRestaurantes } from "../../Actions/actions";
 import { addPlatillo } from "../../Actions/APIMiddleware";
 
 import style from "./platilloUpload.module.css";
