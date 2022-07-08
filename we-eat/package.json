@@ -1,6 +1,7 @@
 {
   "name": "we-eat",
   "version": "0.1.0",
+  "homepage": "https://weeat-restaurantes.onrender.com/",
   "private": true,
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.13.10",
