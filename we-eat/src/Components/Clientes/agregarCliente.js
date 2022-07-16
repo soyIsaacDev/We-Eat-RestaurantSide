@@ -63,45 +63,6 @@ export default function AgregarCliente() {
         type="password"
       />
 
-      {/* <select 
-        id="nombreRest" 
-        name="nombreRest"
-        value= {input.nombreRest}
-        onChange={(e) => handleInputChange(e)}
-        > 
-          {restaurants.map((restaurant) => {
-            return(
-              <option key = {restaurant.nombre} value={restaurant.nombre}>{restaurant.nombre}</option>
-            )
-          })}           
-      </select>
-
-      <select 
-        id="nombreCorp" 
-        name="nombreCorp"
-        value= {input.nombreCorp}
-        onChange={(e) => handleInputChange(e)}
-        > 
-          {corporativos.map((corporativo) => {
-            return(
-              <option key = {corporativo.nombre} value={corporativo.nombre}>{corporativo.nombre}</option>
-            )
-          })}           
-      </select> */}
-
-      <select 
-        id="tipo_de_usuario" 
-        name="tipo_de_usuario"
-        value= {input.tipo_de_usuario}
-        onChange={(e) => handleInputChange(e)}
-        >
-          <option value="Director_General">Director General</option>
-          <option value="Gerente_Regional">Gerente Regional</option>
-          <option value="Gerente_Restaurant">Gerente Restaurant</option>
-          <option value="Cajero">Cajero</option>
-          <option value="Cocinero">Cocinero</option>
-      </select>
-
       {error ? (
         <div className={style.alert}>{error}</div>
       ) : (

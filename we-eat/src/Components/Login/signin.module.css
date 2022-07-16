@@ -1,0 +1,151 @@
+:root{
+    /* Colores */
+    --orange: #F7931A;
+    --soft-orange: #FFE9D5;
+    --warm-black: #201E1C;
+    --warm-black1: #282623;
+    --off-white:  #FAF8F7;
+    --just-white: #FFFFFF;
+    --grey: #bababa;
+    --green: #103606;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-size: 62.5%;
+}
+.allwrapper{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;    
+    background-color: var(--just-white)
+}
+
+.agregarclientes{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 7%;
+    padding-right: 10%;
+    font-size: 2rem;
+    color: black;
+    text-decoration: none;
+}
+   
+    .aqui{
+        width: 9%;
+        color: blue;
+    }
+form{
+    background-color: var(--just-white); 
+}
+.form{
+    width: 100%;
+    height: 93%;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-content: flex-start;    
+}
+    .title{
+        width: 60%;
+        height: 8%;
+        font-size: 4.5rem;
+        font-weight: 800;
+        margin-top: 0%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        color: var(--green);
+    }
+    .respuesta_servidor{
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        width: 100%;
+        height: 4%;
+        margin-top: 0;
+        font-size: 2rem;
+        font-weight: 500;
+        color: red;
+    }
+    .input{
+        width: 70%;
+        height: 12%;
+        margin-top:2%;
+        padding-left: 8%;
+        font-size: 2rem;
+        box-shadow: 0px 8px 6px rgba(89, 73, 30, 0.16);
+        color: var(--warm-black);
+        border: 2px solid var(--green);
+        border-radius: 8px;
+    }
+    .select{
+        width: 70%;
+        height: 12%;
+        margin-top:5%;
+        padding-left: 8%;
+        font-size: 2rem;
+        box-shadow: 0px 8px 6px rgba(89, 73, 30, 0.16);
+        color: var(--warm-black);
+        border: 2px solid var(--green);
+        border-radius: 8px;
+    }
+    .submit{
+        display: flex;
+        justify-content: center;
+        width: 70%;
+        height: 12%;
+        margin-top:5%;;
+        font-size: 3.3rem;
+        font-weight: 500;
+        border-radius: 10px;
+        box-shadow: 0px 8px 6px rgba(89, 73, 30, 0.16);
+        color: var(--warm-black);
+        border: 3px solid var(--green);
+    }
+    .input_data_h2{
+        font-size: 1.7rem;
+        font-weight: 400;
+    }
+    
+        
+@media only screen and (min-width: 820px) {
+    .agregarclientes{
+        width: 100%;
+        height: 5%;
+        padding-right: 27%;
+    }
+        .aqui{
+            width: 6%;
+        }
+    .form{
+        width:65%;
+    }
+    .title{
+        font-size: 6.2rem;
+        margin-top: 1%;
+        font-weight: 800;
+    }
+    .input{
+        margin-top:0%;
+    }
+    .select{
+        margin-top:0%;
+    }
+    .submit{
+        margin-top:0%;
+    }
+}

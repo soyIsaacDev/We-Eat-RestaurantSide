@@ -1,7 +1,5 @@
 // ACTIONS
 
-/* const host = "https://weeatapi.herokuapp.com";
-const localhost = "http://localhost:4000"; */
 import { host } from "../host";
 
 export function getUser(){

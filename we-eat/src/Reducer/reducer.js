@@ -1,7 +1,7 @@
 //REDUCER
 const initialState = {
     
-    loginState:""/* [{"autenticated":"LoggedIn"}] */,
+    loginState:"",
     user: [],
     clienteyRestaurantes:[],
     envios:[],
