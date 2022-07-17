@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { addClienteRestaurant } from "../../Actions/APIMiddleware";
 
-import style from "./agregarCliente.module.css";
+import s from "./agregarCliente.module.css";
 
 export default function AgregarCliente() {
   const dispatch = useDispatch();
@@ -40,34 +40,46 @@ export default function AgregarCliente() {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <h1>Bienvenido a We Eat</h1>
-      <h3>Por favor agrega tus datos</h3>
-      <input
-        name="nombre"
-        value={input.nombre}
-        placeholder="Nombre"
-        onChange={(e) => handleInputChange(e) }
-      />
-      <input
-        name="usuario"
-        value={input.usuario}
-        placeholder="Usuario"
-        onChange={(e) => handleInputChange(e) }
-      />
-      <input
-        name="contraseña"
-        value={input.contraseña}
-        placeholder="Contraseña"
-        onChange={(e) => handleInputChange(e) }
-        type="password"
-      />
+    <form onSubmit={onSubmit} className={s.form}>
+      <section className={s.title_area}>
+        <h1 className={s.title}>Bienvenido a We Eat</h1>
+        <h3 className={s.subtitle}>Por favor agrega tus datos</h3>
+      </section>
+      
+      <section className={s.input_area}>
+        <input
+          name="nombre"
+          value={input.nombre}
+          placeholder="Nombre"
+          onChange={(e) => handleInputChange(e) }
+          className= {s.input}
+        />
+        <input
+          name="usuario"
+          value={input.usuario}
+          placeholder="Usuario"
+          onChange={(e) => handleInputChange(e) }
+          className= {s.input}
+        />
+        <input
+          name="contraseña"
+          value={input.contraseña}
+          placeholder="Contraseña"
+          onChange={(e) => handleInputChange(e) }
+          type="password"
+          className= {s.input}
+        />
+      </section>
+      
+      <section className={s.error_area}>
+        {error ? (
+          <div className={s.alert}>{error}</div>
+        ) : (
+          <input type="submit" className={s.submit} />
+        )}
+      </section>
 
-      {error ? (
-        <div className={style.alert}>{error}</div>
-      ) : (
-        <input type="submit" className={style.submit} />
-      )}
+
     </form>
   );
 }
