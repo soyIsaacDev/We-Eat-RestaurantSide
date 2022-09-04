@@ -22,10 +22,10 @@ export default function Home() {
   );
   let navigate = useNavigate();
 
-  /* window
+  window
     .matchMedia("(min-width: 768px)")
     .addEventListener('change', e => setMatches( e.matches ));
-    {matches && ( navigate("/Home", { replace: true }) )}  */
+    {matches && ( navigate("/Home", { replace: true }) )} 
 
   useEffect(() => {
     //Para saber que restaurant es
