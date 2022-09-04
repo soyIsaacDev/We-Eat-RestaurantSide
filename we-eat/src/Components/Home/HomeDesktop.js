@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { getPedidos, getClienteyRestaurantes, cambiarStatus, enviar } from '../../Actions/actions';
 import NavBar from "../NavBar/NavBar";
@@ -13,6 +14,13 @@ export default function Home() {
   const envio = useSelector((state)=> state.envios);
   const [estado, setEstado] = useState(true);
   const dispatch = useDispatch();
+  const [media, setMedia] = useState(false);
+  let navigate = useNavigate();
+  
+  window
+    .matchMedia("(width < 600px)")
+    .addEventListener('change', e => setMedia( e.media ));
+    {media && ( navigate("/HomeMobile", { replace: true }) )}
 
   useEffect(() => {
     //Para saber que restaurant es
@@ -91,47 +99,49 @@ export default function Home() {
   }
     
   return (
-    <div>
-      <h1>Bienvenido a We-Eat</h1>
+    <div className={s.all}>
+      <h1 className={s.header_title}>Bienvenido a We-Eat</h1>
       <p></p>
       <p></p>
       <NavBar></NavBar>
       <p></p>
-      <h2> Pedidos</h2>
+      <h2 className={s.header_subtitle}> Pedidos</h2>
       <p></p>
-      <div className={s.titulowrap}>
+      <section className={s.grid_header}>
+
         <div className={s.cantidad}>Pedido</div>
         <div className={s.cantidad}>Cantidad</div>
         <div className={s.platillo}>Platillo</div>
         <div className={s.notas}>Notas </div> 
         <div className={s.reparto}>Reparto</div>  
-        <div className={s.boton}></div>      
-      </div>
+        <div className={s.boton}></div> 
+             
+      </section>
 
-      <div className={s.proceso}>Recibidos</div>
+      <div className={s.title_proceso}>Recibidos</div>
       {pedido.map((p) =>{
         if(p.status === "Recibido"){
           return(
             <div>
               
-              <div className={s.pedidowrap}>
+              <div className={s.pedido_proceso_section}>
                 <div className={s.cantidad}>{p.id}</div>
                 <div className={s.cantidad}>{p.cantidad}</div>
                 <div className={s.platillo}>{p.Platillos[0].nombre}</div>
                 <div className={s.notas}> {p.notas}</div>
                 <div className={s.reparto}></div>
-                <button className={s.boton} onClick={(e) => cambiarAEnProceso(e,p)}>Procesar</button>
+                <button className={s.boton_e} onClick={(e) => cambiarAEnProceso(e,p)}>Procesar</button>
               </div>   
             </div>       
           )
         }
       })}
 
-      <div className={s.proceso}>En Proceso</div>
+      <div className={s.title_proceso}>En Proceso</div>
       {pedido.map((p) =>{
         if(p.status === "En_Proceso"){ // NOTA: agregar condicion de reparto para cambiar rapidamente el tipo de boton
           return(
-            <div className={s.pedidowrap}>
+            <div className={s.pedido_proceso_section}>
               <div className={s.cantidad}>{p.id}</div>
               <div className={s.cantidad}>{p.cantidad}</div>
               <div className={s.platillo}>{p.Platillos[0].nombre}</div>
@@ -155,11 +165,11 @@ export default function Home() {
         }
       })}
 
-      <div className={s.proceso}>Listo</div>
+      <div className={s.title_proceso}>Listo</div>
       {pedido.map((p) =>{
         if(p.status === "Listo"){
           return(
-            <div className={s.pedidowrap}>
+            <div className={s.pedido_proceso_section}>
               <div className={s.cantidad}>{p.id}</div>
               <div className={s.cantidad}>{p.cantidad}</div>
               <div className={s.platillo}>{p.Platillos[0].nombre}</div>

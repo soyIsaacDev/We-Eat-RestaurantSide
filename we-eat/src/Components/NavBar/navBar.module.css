@@ -1,28 +1,53 @@
-
+:root{
+    /* Colores */
+    --orange: #F7931A;
+    --soft-orange: #FFE9D5;
+    --warm-black: #201E1C;
+    --warm-black1: #282623;
+    --off-white:  #FAF8F7;
+    --just-white: #FFFFFF;
+    --grey: #bababa;
+    --green: #103606;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-size: 62.5%;
+    font-family:'DM Sans', sans-serif;
+}
 .navBar{
     width:100vw;
-    height: 8vh;
+    height: 12vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    color:var(--green);
 }
+    .link_local{
+        text-decoration: none;
+    }
     .menu_button{
-        width: 8vh;
-        height: 8vh;
-        font-size: 1.5rem;
-        font-weight: 600;
+        width: 14vh;
+        height: 12vh;
+        font-size: 1.3rem;
+        font-weight: 700;
         border-radius: 50%;
-        margin: 0 2.5vw;
+        margin: 0 1.5vw;
         border: solid;
         border-color: gainsboro;
         border-width: 2px;
         box-shadow: 0px 2px 8px gainsboro;
-
+        color: var(--green);
+        background-color: var(--just-white);
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        background-color: white;
+        text-decoration: none;
     }
     .menu_button:hover{
         background-color: gainsboro;
@@ -30,3 +55,40 @@
     }
     
     
+@media only screen and (min-width: 390px) {
+    .navBar{
+        height: 13vh;
+    }
+    .menu_button{
+        width: 14vh;
+        height: 13vh;
+        margin: 0 1vw;
+        font-size: 1.6rem;
+    }
+}
+
+@media only screen and (min-width: 760px) {
+    .navBar{
+        height: 14vh;
+    }
+    .menu_button{
+        width: 14vh;
+        height: 14vh;
+        margin: 0 5vw;
+        font-size: 2.1rem;
+        font-weight: 800;
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+    .navBar{
+        width:100vw;
+        height: 26vh;
+    }
+    .menu_button{
+        width: 26vh;
+        height: 26vh;
+        margin: 0 3vw;
+        font-size: 2rem;
+    }
+}

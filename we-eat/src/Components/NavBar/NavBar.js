@@ -13,32 +13,21 @@ import pedido from "./take-away.png";
 export default function NavBar() {
   return (
       <div className={s.navBar}>
-          <button className={s.menu_button}  >
-            <img src= {inicio} alt="Inicio" ></img>
-          </button>     
-          <button className={s.menu_button} >
-            <img src= {cuenta} alt="Cuenta"></img>
-          </button>
-          <Link to="/agregarRestaurant">
+          <Link to="/homemobile" className={s.link_local}>
+            <button className={s.menu_button}  >
+              Inicio
+            </button>
+          </Link> 
+          <Link to="/agregarRestaurant" className={s.link_local}>
             <button className={s.menu_button}>
-              <img src= {restaurantes} alt="Restaurantes" ></img>
+              + Restaurantes
             </button>
           </Link>
-          <Link to ="/agregarplatillo">
+          <Link to ="/agregarplatillo" className={s.link_local}>
             <button className={s.menu_button}>
-              <img src= {platillo} alt="Platillo"></img>
+              + Platillos
             </button>
           </Link>
-          {/* <Link to ="/agregarclienterestaurant">
-            <button className={s.menu_button}>
-              <img src= {usuario} alt="Usuarios"></img>
-            </button>
-          </Link>
-          <Link to ="/pedidos">
-            <button className={s.menu_button}>
-              <img src= {pedido} alt="pedidos"></img>
-            </button>
-          </Link> */}
           
       </div>
   );
