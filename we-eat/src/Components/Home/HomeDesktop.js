@@ -114,7 +114,7 @@ export default function Home() {
         <div className={s.platillo}>Platillo</div>
         <div className={s.notas}>Notas </div> 
         <div className={s.reparto}>Reparto</div>  
-        <div className={s.boton}></div> 
+        <div className={s.boton_proceso} style={{visibility: "hidden"}}></div> 
              
       </section>
 
@@ -130,7 +130,7 @@ export default function Home() {
                 <div className={s.platillo}>{p.Platillos[0].nombre}</div>
                 <div className={s.notas}> {p.notas}</div>
                 <div className={s.reparto}></div>
-                <button className={s.boton_e} onClick={(e) => cambiarAEnProceso(e,p)}>Procesar</button>
+                <button className={s.boton_proceso} onClick={(e) => cambiarAEnProceso(e,p)}>Procesar</button>
               </div>   
             </div>       
           )
@@ -146,6 +146,7 @@ export default function Home() {
               <div className={s.cantidad}>{p.cantidad}</div>
               <div className={s.platillo}>{p.Platillos[0].nombre}</div>
               <div className={s.notas}> {p.notas}</div>
+              <div className={s.reparto}></div>
               {/* Dependiendo del Status de Reparto */}
               {!p.Envio? 
                 <div className={s.enviowrap}>
@@ -176,9 +177,13 @@ export default function Home() {
               <div className={s.notas}> {p.notas}</div>
               <div className={s.reparto}>{p.Envio.reparto}</div>
               {p.Envio.reparto === "En_Restaurante"? 
-                <button className={s.boton} onClick={(e) => cambiarAEnReparto(e,p)}>Entregar</button>
-                :
-                <div className={s.boton}></div> 
+                <div className={s.enviowrap}>
+                  <button className={s.boton_e} onClick={(e) => cambiarAEnReparto(e,p)}>Entregar</button>
+                </div> 
+              :
+              <div className={s.enviowrap}>
+                <div className={s.boton_e}></div> 
+              </div>
               }
             </div>          
           )

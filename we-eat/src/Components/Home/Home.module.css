@@ -38,156 +38,14 @@ html{
         flex-wrap: wrap;
         align-items:center;
         justify-content: center;
-        width: 83%;
-        height: 5vh;
-        padding-left: 12%;
-        font-size: 1rem;
-        font-weight: 700;
-    }
-        .cantidad{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items:center;
-            width: 15%;
-            margin-left: 1.5%;
-        }
-        .platillo{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items:center;
-            width: 23%;
-        }
-        .notas{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items:center;
-            width: 22%;
-        }
-        .reparto{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items:center;
-            width: 16%;
-        }
-        
-        .boton{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items:center;
-            width: 12%;
-            margin-left: 5%;
-            border-radius: 10px;
-            background-color: white;
-            color: black;
-        }
-        .boton:hover{
-            background-color: black;
-            color: white;
-        }
-    .title_proceso{
-        display: flex;
-        flex-wrap: wrap;
-        align-items:center;
-        justify-content: flex-start;
         width: 100%;
-        height: 5vh;
-        margin-left: 3%;
-        margin-top: 1%;
-        padding: 0;
-        font-size: 1.5rem;
-        font-weight: 500; 
-    }
-
-
-    .pedido_proceso_section{
-        display: flex;
-        flex-wrap: wrap;
-        align-items:center;
-        justify-content: center;
-        width: 100%;
-        height: 5vh;
+        height: 6vh;
         padding-left: 12%;
-        font-size: 1rem;
-        font-weight: 400;
-        background-color: var(--just-white);
-        box-shadow: 0px 15px 6px gainsboro;
-        background-color:var(--orange) ;
-    }
-            .enviowrap{
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items:center;
-                width:31%;
-            }
-                .reparto_e{
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: center;
-                    align-items:center;
-                    width: 50%;
-                }
-                .boton_e{
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: center;
-                    align-items:center;
-                    width: 30%;
-                    margin-left: 17%;
-                    border-radius: 10px;
-                    background-color: white;
-                    color: black;
-                }
-                .boton_e:hover{
-                    background-color: black;
-                    color: white;
-                }
-            
-@media only screen and (min-width: 1000px) {
-    
-    .grid_header{
-        display: flex;
-        flex-wrap: wrap;
-        align-items:center;
-        justify-content: center;
-        width: 83%;
-        height: 5vh;
-        padding-left: 12%;
+        margin-bottom: -1%;
         font-size: 2.3rem;
         font-weight: 700;
-        background-color: #F7931A;
+        background-color:beige;
     }
-.title_proceso{
-    display: flex;
-    flex-wrap: wrap;
-    align-items:center;
-    justify-content: flex-start;
-    width: 100%;
-    height: 5vh;
-    margin-left: 3%;
-    margin-top: 1%;
-    padding: 0;
-    font-size: 2rem;
-    font-weight: 700;
-    background-color:beige;
-}
-
-.pedido_proceso_section{
-    display: flex;
-    flex-wrap: wrap;
-    align-items:center;
-    justify-content: center;
-    width: 83%;
-    height: 8.5vh;
-    padding-left: 12%;
-    font-size: 1.7rem;
-    font-weight: 700;
-}
         .cantidad{
             display: flex;
             flex-wrap: wrap;
@@ -201,6 +59,124 @@ html{
             flex-wrap: wrap;
             justify-content: center;
             align-items:center;
+            width: 25vw;
+        }
+        .notas{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items:center;
+            width: 22%;
+        }
+        .reparto{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items:center;
+            width: 16%;
+        }
+        
+        .boton_proceso{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items:center;
+            width: 9%;
+            height: 6vh;
+            margin-left: 2%;
+            border-radius: 10px;
+            font-size: 2rem;
+            font-weight: 700;
+            background-color: white;
+            color: black;
+        }
+        .boton_proceso:hover{
+            background-color: black;
+            color: white;
+        }
+    .title_proceso{
+        display: flex;
+        flex-wrap: wrap;
+        align-items:center;
+        justify-content: flex-start;
+        width: 100%;
+        height: 5vh;
+        margin-left: 0;
+        margin-top: 1%;
+        padding-left: 3%;
+        font-size: 2rem;
+        font-weight: 700; 
+        width: 100%;
+        background-color:beige;
+    }
+
+    .borrar{
+        display: flex;
+        flex-wrap: wrap;
+        align-items:center;
+        justify-content: center;
+        width: 100%;
+        height: 5vh;
+        padding-left: 12%;
+        font-size: 2.3rem;
+        font-weight: 700;
+        background-color: var(--orange);
+    }
+    .pedido_proceso_section{
+        display: flex;
+        flex-wrap: wrap;
+        align-items:center;
+        justify-content: center;
+        width: 100%;
+        height: 8.5vh;
+        margin: 0;
+        padding-left: 12%;
+        font-size: 1.7rem;
+        font-weight: 700;
+        background-color: var(--just-white);
+        box-shadow: 0px 15px 6px gainsboro;
+        background-color:var(--orange) ;
+    }
+            .enviowrap{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items:center;
+                width:10%;
+            }
+                .reparto_e{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items:center;
+                    width: 50%;
+                }
+                .boton_e{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items:center;
+                    font-size: 2rem;
+                    font-weight: 700;
+                    width: 100%;
+                    height: 6vh;
+                    margin-left: 17%;
+                    border-radius: 10px;
+                    background-color: white;
+                    color: black;
+                }
+                .boton_e:hover{
+                    background-color: black;
+                    color: white;
+                }
+            
+/* @media only screen and (min-width: 1000px) {
+ 
+        .platillo{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items:center;
             width: 23%;
         }
         .notas{
@@ -218,29 +194,10 @@ html{
             width: 16%;
         }
         
-        .boton_e{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items:center;
-            font-size: 1.7rem;
-            font-weight: 700;
-            width: 30%;
-            margin-left: 17%;
-            border-radius: 10px;
-            background-color: white;
-            color: black;
-        }
+        
         .boton_e:hover{
             background-color: black;
             color: white;
-        }
-        .enviowrap{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items:center;
-            width:31%;
         }
             .reparto_e{
                 display: flex;
@@ -251,4 +208,4 @@ html{
             }
             
 
-}
+} */
