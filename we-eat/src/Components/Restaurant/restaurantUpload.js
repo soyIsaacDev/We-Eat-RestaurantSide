@@ -144,12 +144,12 @@ export default function Restaurant() {
                 placeholder="Costo de Envio"
                 onChange={(e) => handleInputChange(e)}
             />
-            <input
+            {/* <input
                 name= "horarios"
                 value={input.horarios}
                 placeholder="Horarios"
                 onChange={(e) => handleInputChange(e)}
-            />
+            /> */}
             {/* <label>Tipo de Comida</label>
             <select 
                 id="tipoComida" 
