@@ -16,15 +16,15 @@ export default function PlatilloUpload() {
     (state) => state.clienteyRestaurantes.Restaurantes
   );
   console.log("Username L20 PlatilloUpload -->>  " + username);
-  /* const [input, setInput] = useState({
+  const [input, setInput] = useState({
     nombreMenu: "Desayuno",
     nombrePlatillo: "",
     descripcion: "",
     precio: "",
     nombreRest: "",
-  }); */
+  });
   //ParaTesteo
-  const [input, setInput] = useState({
+  /* const [input, setInput] = useState({
     nombreMenu: "Desayuno",
     nombrePlatillo: "Langosta a la Mantequilla",
     descripcion: "Cola de Langosta preparada con Mantequilla",
@@ -33,7 +33,7 @@ export default function PlatilloUpload() {
   });
 
   console.log(restaurantes);
-  console.log(input)
+  console.log(input) */
 
   useEffect(() => {
     if(restaurantes){
@@ -97,7 +97,7 @@ export default function PlatilloUpload() {
           onChange={(e) => handleInputChange(e)}
         />
         <label>Menu</label>
-        <select
+        {/* <select
           id="nombreMenu"
           name="nombreMenu"
           defaultValue={input.nombreMenu}
@@ -111,7 +111,7 @@ export default function PlatilloUpload() {
           <option value="Sopa">Sopa</option>
           <option value="Bebidas">Bebidas</option>
           <option value="Postre">Postre</option>
-        </select>
+        </select> */}
 
         <select
           id="nombreRest"

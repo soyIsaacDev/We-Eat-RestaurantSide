@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Mapa from "../Map/Mapa";
+//import Mapa from "../Map/Mapa";
 
 import style from "./restautantUpload.module.css";
 
@@ -12,17 +12,17 @@ import {host} from "../../host.js"
 
 export default function Restaurant() {
     let navigate = useNavigate();;
-    /* const [input, setInput] = useState({ 
+    const [input, setInput] = useState({ 
         nombre: "", direccion: "", area_de_reparto:"", actividad:"Abierto", estatus:"Activo",
         nombreCorp:"",  direccionCorp:"", costoEnvio: "", horarios: "", tipoComida:"Desayuno", usuario:"",
-    }); */
+    });
     //PARA TESTEO
-    const [input, setInput] = useState({ 
+    /* const [input, setInput] = useState({ 
         nombre: "Cedron", direccion: "Condesa", area_de_reparto:3, actividad:"Abierto", estatus:"Activo",
         nombreCorp:"Cedron",  direccionCorp:"Condesa", costoEnvio: 25, horarios: "9-12", tipoComida:"Desayuno", usuario:"",
         location: ""
     });
-    console.log(input)
+    console.log(input) */
     
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
@@ -102,7 +102,7 @@ export default function Restaurant() {
                 placeholder = "Direccion"
                 onChange={(e) => handleInputChange(e)}
             />
-            <Mapa height = "70vh" width = "80vw"></Mapa>
+            {/* <Mapa height = "70vh" width = "80vw"></Mapa> */}
             <input
                 name= "area_de_reparto"
                 value= {input.area_de_reparto}
@@ -132,12 +132,12 @@ export default function Restaurant() {
                 <option value="En_Registro">En Registro</option>
                 <option value="En_Baja">Baja</option>
             </select>
-            <input
+            {/* <input
                 name= "nombreCorp"
                 value= {input.nombreCorp}
                 placeholder="Nombre del Corporativo"
                 onChange={(e) => handleInputChange(e)}
-            />
+            /> */}
             <input
                 name= "costoEnvio"
                 value={input.costoEnvio}
@@ -150,7 +150,7 @@ export default function Restaurant() {
                 placeholder="Horarios"
                 onChange={(e) => handleInputChange(e)}
             />
-            <label>Tipo de Comida</label>
+            {/* <label>Tipo de Comida</label>
             <select 
                 id="tipoComida" 
                 name="tipoComida"
@@ -162,7 +162,7 @@ export default function Restaurant() {
                 <option value="Comida">Comida</option>
                 <option value="Cena">Cena</option>
                 <option value="Ensaladas">Ensaladas</option>
-            </select>
+            </select> */}
 
             <input type="file" name="file" onChange={onChangeHandler} className={style.file}/>
             {isFilePicked ? (

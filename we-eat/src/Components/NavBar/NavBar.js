@@ -3,13 +3,6 @@ import { Link } from 'react-router-dom';
 
 import s from "./navBar.module.css";
 
-import inicio from "./power-button.png";
-import cuenta from "./chef.png";
-import restaurantes from "./restaurant.png";
-import platillo from "./comida.png";
-import usuario from "./cocinero.png";
-import pedido from "./take-away.png";
-
 export default function NavBar() {
   return (
       <div className={s.navBar}>

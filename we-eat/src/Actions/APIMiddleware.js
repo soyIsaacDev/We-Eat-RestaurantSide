@@ -40,8 +40,6 @@ export function postAuth(data){
         console.log("Ejecutando postAuth");
         const auth = {"username": data.username}
         console.log("Ejecutando postAuth -username --> "+ auth);
-        dispatch(setUser(auth));
-        
         async function postData(){
             const requestOptions = {
               method: 'POST',
@@ -57,6 +55,7 @@ export function postAuth(data){
             .then(json=> dispatch(postLoginSession(auth))); */
         };    
         postData();
+        dispatch(setUser(auth));
     }
 }
 
